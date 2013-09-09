@@ -3492,6 +3492,7 @@ header h1 {
   flex-grow: 0;
   background: #222222;
   height: 100%;
+  min-height: 8in;
   z-index: 1;
   width: 3in;
   margin-top: -0.5in;

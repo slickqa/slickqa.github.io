@@ -8,15 +8,16 @@ angular.module('SlickWebsite', ['ngAnimate', 'ngCookies'])
         };
 
         $scope.navShow = function() {
-            return show;
+            return show || $scope.navMode() == "pinned";
         };
 
-        $scope.toggleMode = function() {
+        $scope.toggleMode = function($event) {
             if($scope.navMode() == "overlay") {
-                cookieStore.put("nav-mode", 'pinned');
+                $cookieStore.put("nav-mode", 'pinned');
             } else {
-                cookieStore.put("nav-mode", 'overlay');
+                $cookieStore.put("nav-mode", 'overlay');
             }
+            $event.preventDefault();
         };
 
         $scope.navMode = function() {
@@ -25,5 +26,9 @@ angular.module('SlickWebsite', ['ngAnimate', 'ngCookies'])
             } else {
                 return "overlay";
             }
-        }
+        };
+
+        $scope.navModeClass = function() {
+            return "sidenav-" + $scope.navMode();
+        };
     });

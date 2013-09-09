@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="SlickWebsite">
 <head>
-    <title>Slick Quality Management Applications</title>
+    <title>SlickQA: {{ page.title }}</title>
     <link rel="stylesheet" href="/css/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.js"></script>
@@ -14,18 +14,29 @@
             <div>
                 <a href="#" class="sidenav-button-link" ng-click="toggleNav($event)"><img src="/images/icon-menu.svg"/></a>
             </div>
-	        <h1>Slick Quality Management Applications</h1>
+	        <h1>{{ page.title }}</h1>
         </div>
     </header>
 
     <div class="flex-layout-row-nowrap flex-container main">
-        <section class="sidenav sidenav-{{ navMode() }}" ng-show="navShow()">
-
+        <section class="sidenav" ng-class="navModeClass()" ng-show="navShow()">
+            <div class="sidenav-inner">
+                <div class="sidenav-pin-box">
+                    <a href="#" ng-click="toggleMode($event)">{% raw %}<img class="sidenav-mode-image" ng-src="/images/sidenav-{{ navMode() }}.png"/> {% endraw %}</a>
+                </div>
+                <a class="clickable-text" href="/">Home</a><br />
+                {% for link in site.pages %}
+                    {% unless link.title contains 'Home' %}
+                        <a class="clickable-text" href="{{ link.url }}">{{ link.title }}</a><br />
+                    {% endunless %}
+                {% endfor %}
+            </div>
         </section>
         <section class="main-container">
             <div class="main-view">
-                <img src="/images/slickFancy.gif" alt="Fancy Animated Slick Logo" />
-                <p>Slick is a collection of applications and tools to help you manage software quality cycle.</p>
+                <div class="slickview">
+                    {{ content }}
+                </div>
             </div>
         </section>
     </div>

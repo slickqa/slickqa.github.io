@@ -17,6 +17,7 @@ What can it do?
 ---------------
 
 A short feature list is:
+
 * Various ways to categorize tests, including by project, component, feature, and arbitrary tags.
 * Test automation integration without a predefined test tool!  You can use whatever you want
 * Documented REST Api

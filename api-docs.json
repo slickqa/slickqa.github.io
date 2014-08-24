@@ -3,59 +3,59 @@
     "apis": [
         {
             "description": "Access to and modification of projects in slick.",
-            "path": "/../api-docs/projects.json"
+            "path": "/../api-docs/projects"
         },
         {
             "description": "Get build reports.",
-            "path": "/../api-docs/build-report.json"
+            "path": "/../api-docs/build-report"
         },
         {
             "description": "Add, edit or remove configurations of different types.",
-            "path": "/../api-docs/configurations.json"
+            "path": "/../api-docs/configurations"
         },
         {
             "description": "Create, modify, and delete dashboard configurations.",
-            "path": "/../api-docs/dashboards.json"
+            "path": "/../api-docs/dashboards"
         },
         {
             "description": "Upload, or Download files on slick.",
-            "path": "/../api-docs/files.json"
+            "path": "/../api-docs/files"
         },
         {
             "description": "Add, Update or delete results.",
-            "path": "/../api-docs/results.json"
+            "path": "/../api-docs/results"
         },
         {
             "description": "Get slick audit log events.",
-            "path": "/../api-docs/slicklogevents.json"
+            "path": "/../api-docs/slicklogevents"
         },
         {
             "description": "Create, modify, and delete slick system configurations.",
-            "path": "/../api-docs/system-configuration.json"
+            "path": "/../api-docs/system-configuration"
         },
         {
             "description": "Add, update, and delete testcases.",
-            "path": "/../api-docs/testcases.json"
+            "path": "/../api-docs/testcases"
         },
         {
             "description": "Add, update, and delete testplans.",
-            "path": "/../api-docs/testplans.json"
+            "path": "/../api-docs/testplans"
         },
         {
             "description": "Add, update, and delete testruns.",
-            "path": "/../api-docs/testruns.json"
+            "path": "/../api-docs/testruns"
         },
         {
             "description": "Add, update, and delete testrungroups.",
-            "path": "/../api-docs/testrungroups.json"
+            "path": "/../api-docs/testrungroups"
         },
         {
             "description": "Access user accounts.",
-            "path": "/../api-docs/users.json"
+            "path": "/../api-docs/users"
         },
         {
             "description": "Get slick version information",
-            "path": "/../api-docs/version.json"
+            "path": "/../api-docs/version"
         }
     ],
     "authorizations": {},

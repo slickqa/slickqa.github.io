@@ -4249,3 +4249,8 @@ header h1 {
   background: linear-gradient(#aa0000, #660000);
   color: #ffffff;
 }
+
+img[alt="slick logo"] {
+    margin-left: auto;
+    margin-right: auto;
+}

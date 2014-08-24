@@ -1,6 +1,6 @@
 angular.module('SlickWebsite', ['ngAnimate', 'ngCookies'])
     .controller('MainController', function($scope, $cookieStore) {
-        var show = false;
+        var show = true;
 
         $scope.toggleNav = function($event) {
             show = !show;

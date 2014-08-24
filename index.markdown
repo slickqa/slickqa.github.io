@@ -10,7 +10,7 @@ What is slick?
 
 Slick is a web app that helps you organize your testing infrastructure.  That means slick does what most test or quality
 management applications do.  It keeps track of test cases, projects, results of tests, etc.  One of the main goals
-of slick is to make it really easy for engineers and analysts to do their jobs.  Slick's goal is to look nice, give
+of slick is to make it really easy for engineers and analysts to do their jobs.  Slick should look nice, give
 management what they need, and get out of the way for those using it.
 
 What can it do?

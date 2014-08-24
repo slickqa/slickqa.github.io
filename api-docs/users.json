@@ -1,0 +1,137 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "UserAccount"
+                    },
+                    "method": "GET",
+                    "nickname": "get_users",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for user accounts.",
+                    "type": "array"
+                }
+            ],
+            "path": "/users"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_current_user",
+                    "notes": "If you supply 'current' as the user's email address it will return the currently logged in user's account, or a 404 if no one is logged in.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The email address of the user you wish to recieve the account for, or current for the currently logged in user.",
+                            "name": "email",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Retrieve a user account by their email address.",
+                    "type": "UserAccount"
+                }
+            ],
+            "path": "/users/{email}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_user_account",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The email address of the user you wish to recieve the account for, or current for the currently logged in user.",
+                            "name": "email",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "UserAccount"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a user's account info.",
+                    "type": "UserAccount"
+                }
+            ],
+            "path": "/users/{email}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "UserAccount": {
+            "id": "UserAccount",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "last_login": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "openid": {
+                    "type": "string"
+                },
+                "short_name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/users",
+    "swaggerVersion": "1.2"
+}

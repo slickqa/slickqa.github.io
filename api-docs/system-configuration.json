@@ -1,0 +1,425 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "BaseSystemConfiguration"
+                    },
+                    "method": "GET",
+                    "nickname": "get_system_configurations",
+                    "notes": "This method returns other types, but the values in BaseSystemConfiguration are guaranteed to be common.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "A shortcut for querying for the configuration type.",
+                            "name": "config-type",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Find various system configuration types.",
+                    "type": "array"
+                }
+            ],
+            "path": "/system-configuration"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_system_configuration",
+                    "notes": "This method accepts and returns other system configuration types, but the values in BaseSystemConfiguration are guaranteed to be common.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "BaseSystemConfiguration"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a new system configuration",
+                    "type": "BaseSystemConfiguration"
+                }
+            ],
+            "path": "/system-configuration"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_system_configuration_by_id",
+                    "notes": "This method returns other types, but the values in BaseSystemConfiguration are guaranteed to be common.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id for the system configuration (the string representation of the BSON ObjectId).",
+                            "name": "config_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a specific configuration using it's id",
+                    "type": "BaseSystemConfiguration"
+                }
+            ],
+            "path": "/system-configuration/{config_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_system_configuration",
+                    "notes": "This method accepts and returns other system configuration types, but the values in BaseSystemConfiguration are guaranteed to be common.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id for the system configuration (the string representation of the BSON ObjectId).",
+                            "name": "config_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "BaseSystemConfiguration"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a specific system configuration",
+                    "type": "BaseSystemConfiguration"
+                }
+            ],
+            "path": "/system-configuration/{config_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "AMQPSystemConfiguration": {
+            "id": "AMQPSystemConfiguration",
+            "properties": {
+                "className": {
+                    "enum": [
+                        "org.tcrun.slickij.api.data.AMQPSystemConfiguration"
+                    ],
+                    "type": "string"
+                },
+                "configurationType": {
+                    "enum": [
+                        "amqp-system-configuration"
+                    ],
+                    "type": "string"
+                },
+                "exchangeName": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "typeName": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "virtualHost": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ]
+        },
+        "AutomaticTestrunGroupSystemConfiguration": {
+            "id": "AutomaticTestrunGroupSystemConfiguration",
+            "properties": {
+                "configurationType": {
+                    "enum": [
+                        "auto-add-to-testrungroup"
+                    ],
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "groupType": {
+                    "enum": [
+                        "PARALLEL",
+                        "SERIAL"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "matchers": {
+                    "items": {
+                        "type": "TestrunMatch"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "replaceSameBuild": {
+                    "type": "boolean"
+                },
+                "template": {
+                    "type": "string"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ]
+        },
+        "BaseSystemConfiguration": {
+            "discriminator": "typeName",
+            "id": "BaseSystemConfiguration",
+            "properties": {
+                "configurationType": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ],
+            "subTypes": [
+                "AMQPSystemConfiguration",
+                "EmailSubscriptionSystemConfiguration",
+                "AutomaticTestrunGroupSystemConfiguration",
+                "EmailSystemConfiguration",
+                "EmailOffSwitchSystemConfiguration"
+            ]
+        },
+        "EmailOffSwitchSystemConfiguration": {
+            "id": "EmailOffSwitchSystemConfiguration",
+            "properties": {
+                "className": {
+                    "enum": [
+                        "org.tcrun.slickij.api.data.EmailOffSwitch"
+                    ],
+                    "type": "string"
+                },
+                "configurationType": {
+                    "enum": [
+                        "email-off-switch"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "turnOffEmailsForId": {
+                    "type": "string"
+                },
+                "turnOffEmailsForType": {
+                    "type": "string"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ]
+        },
+        "EmailSubscriptionSystemConfiguration": {
+            "id": "EmailSubscriptionSystemConfiguration",
+            "properties": {
+                "className": {
+                    "enum": [
+                        "org.tcrun.slickij.api.data.EmailSubscription"
+                    ],
+                    "type": "string"
+                },
+                "configurationType": {
+                    "enum": [
+                        "email-subscription"
+                    ],
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "subscriptions": {
+                    "items": {
+                        "type": "SubscriptionInfo"
+                    },
+                    "type": "array"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ]
+        },
+        "EmailSystemConfiguration": {
+            "id": "EmailSystemConfiguration",
+            "properties": {
+                "className": {
+                    "enum": [
+                        "org.tcrun.slickij.api.data.EmailSystemConfiguration"
+                    ],
+                    "type": "string"
+                },
+                "configurationType": {
+                    "enum": [
+                        "email-system-configuration"
+                    ],
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sender": {
+                    "type": "string"
+                },
+                "smtpHostname": {
+                    "type": "string"
+                },
+                "smtpPassword": {
+                    "type": "string"
+                },
+                "smtpPort": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "smtpUsername": {
+                    "type": "string"
+                },
+                "ssl": {
+                    "type": "boolean"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ]
+        },
+        "SubscriptionInfo": {
+            "id": "SubscriptionInfo",
+            "properties": {
+                "onStart": {
+                    "type": "boolean"
+                },
+                "subscriptionType": {
+                    "type": "string"
+                },
+                "subscriptionValue": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "TestrunMatch": {
+            "id": "TestrunMatch",
+            "properties": {
+                "comparisonType": {
+                    "enum": [
+                        "equals",
+                        "equals-ignore-case",
+                        "contains"
+                    ],
+                    "type": "string"
+                },
+                "propertyName": {
+                    "type": "string"
+                },
+                "propertyValue": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/system-configuration",
+    "swaggerVersion": "1.2"
+}

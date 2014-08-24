@@ -1,0 +1,45 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "ProductVersion"
+                    },
+                    "method": "GET",
+                    "nickname": "get_version",
+                    "notes": "This returns an array, but right now it's guaranteed to only have one element in it, the slick version.",
+                    "parameters": [],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the slick version",
+                    "type": "array"
+                }
+            ],
+            "path": "/version"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "ProductVersion": {
+            "id": "ProductVersion",
+            "properties": {
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "productName": {
+                    "type": "string"
+                },
+                "versionString": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/version",
+    "swaggerVersion": "1.2"
+}

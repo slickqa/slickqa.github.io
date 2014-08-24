@@ -1,0 +1,118 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "SlickLogEvent"
+                    },
+                    "method": "GET",
+                    "nickname": "get_events",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for slick log events.",
+                    "type": "array"
+                }
+            ],
+            "path": "/slicklogevents"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "create_event",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "SlickLogEvent"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a new slick log event.",
+                    "type": "SlickLogEvent"
+                }
+            ],
+            "path": "/slicklogevents"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "SlickLogEvent": {
+            "id": "SlickLogEvent",
+            "properties": {
+                "eventType": {
+                    "enum": [
+                        "CREATED",
+                        "DELETED",
+                        "MODIFIED",
+                        "MESSAGE"
+                    ],
+                    "type": "string"
+                },
+                "fieldType": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "occurred": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "targetid": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/slicklogevents",
+    "swaggerVersion": "1.2"
+}

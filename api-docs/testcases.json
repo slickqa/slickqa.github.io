@@ -1,0 +1,319 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Testcase"
+                    },
+                    "method": "GET",
+                    "nickname": "get_testcases",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for testcases.",
+                    "type": "array"
+                }
+            ],
+            "path": "/testcases"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_testcase",
+                    "notes": "If a user is logged in and no author is provided, the the author field will be filled in automatically.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Testcase"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a new testcase.",
+                    "type": "Testcase"
+                }
+            ],
+            "path": "/testcases"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_testcase_by_id",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id of the testcase you are trying to access (string representation of BSON ObjectId).",
+                            "name": "testcase_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Retrieve a testcase by it's id.",
+                    "type": "Testcase"
+                }
+            ],
+            "path": "/testcases/{testcase_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_testcase",
+                    "notes": "When submitting updates, you only need to provide the properties that have changed.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id of the testcase you are trying to access (string representation of BSON ObjectId).",
+                            "name": "testcase_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Testcase"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update the properties of a testcase.",
+                    "type": "Testcase"
+                }
+            ],
+            "path": "/testcases/{testcase_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "ComponentReference": {
+            "id": "ComponentReference",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ConfigurationReference": {
+            "id": "ConfigurationReference",
+            "properties": {
+                "configId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "FeatureReference": {
+            "id": "FeatureReference",
+            "properties": {
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ProjectReference": {
+            "id": "ProjectReference",
+            "properties": {
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "RecurringNote": {
+            "id": "RecurringNote",
+            "properties": {
+                "environment": {
+                    "type": "ConfigurationReference"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "release": {
+                    "type": "ReleaseReference"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ReleaseReference": {
+            "id": "ReleaseReference",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "releaseId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "Step": {
+            "id": "Step",
+            "properties": {
+                "expectedResult": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "Testcase": {
+            "id": "Testcase",
+            "properties": {
+                "activeNotes": {
+                    "items": {
+                        "type": "RecurringNote"
+                    },
+                    "type": "array"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "automated": {
+                    "type": "boolean"
+                },
+                "automationConfiguration": {
+                    "type": "string"
+                },
+                "automationId": {
+                    "type": "string"
+                },
+                "automationKey": {
+                    "type": "string"
+                },
+                "automationPriority": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "automationTool": {
+                    "type": "string"
+                },
+                "component": {
+                    "type": "ComponentReference"
+                },
+                "deleted": {
+                    "type": "boolean"
+                },
+                "feature": {
+                    "type": "FeatureReference"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "importanceRating": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "inactiveNotes": {
+                    "items": {
+                        "type": "RecurringNote"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "ProjectReference"
+                },
+                "purpose": {
+                    "type": "string"
+                },
+                "requirements": {
+                    "type": "string"
+                },
+                "stabilityRating": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "steps": {
+                    "items": {
+                        "type": "Step"
+                    },
+                    "type": "array"
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/testcases",
+    "swaggerVersion": "1.2"
+}

@@ -1,0 +1,1141 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Project"
+                    },
+                    "method": "GET",
+                    "nickname": "get_projects",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for available projects in slick",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Project"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a new Project to slick.",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "set_default_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the build to set as default.",
+                            "name": "build_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get the build from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the build from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Set a default build of a release.",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds/setdefaultbuild/{build_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_specific_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the build to get.",
+                            "name": "build_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get the build from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the build from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a build by id or name.",
+                    "type": "Build"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds/byname/{build_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_default_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get the build from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the build from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the default build (of a release).",
+                    "type": "Build"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds/default"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_specific_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the build to get.",
+                            "name": "build_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get the build from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the build from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a build by id or name.",
+                    "type": "Build"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds/{build_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the build to update.",
+                            "name": "build_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to update the build from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to update the build from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Build"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a build",
+                    "type": "Build"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds/{build_id}"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Build"
+                    },
+                    "method": "DELETE",
+                    "nickname": "delete_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the build to delete.",
+                            "name": "build_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to delete the build from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to delete the build from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Delete an individual build.",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds/{build_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_specific_component_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the component from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the component to get.",
+                            "name": "component_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a component by name or id.",
+                    "type": "Component"
+                }
+            ],
+            "path": "/projects/{project_id}/components/byname/{path:component_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_specific_release_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get a release from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a release of a project by it's name or id.",
+                    "type": "Release"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/byname/{release_id}"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Build"
+                    },
+                    "method": "GET",
+                    "nickname": "get_builds",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get builds from.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get builds from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get all the builds of a release (and project).",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_build",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to add a build to.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to add a build to.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Build"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a build to a release (and project).",
+                    "type": "Build"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}/builds"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "set_default_release_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to set as default.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get a release from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Set a default release for a project.",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/{project_id}/setdefaultrelease/{release_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_specific_component_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the component from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the component to get.",
+                            "name": "component_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a component by name or id.",
+                    "type": "Component"
+                }
+            ],
+            "path": "/projects/{project_id}/components/{component_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_component",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the component from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the component to update.",
+                            "name": "component_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Component"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a component's properties",
+                    "type": "Component"
+                }
+            ],
+            "path": "/projects/{project_id}/components/{component_id}"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Component"
+                    },
+                    "method": "DELETE",
+                    "nickname": "delete_component",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to delete the component from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the component to delete.",
+                            "name": "component_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Delete a component from a project.",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects/{project_id}/components/{component_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_default_release_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the default release from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the default release of a project.",
+                    "type": "Release"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/default"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_specific_release_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to get.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get a release from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a release of a project by it's name or id.",
+                    "type": "Release"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_release",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to update.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to update a release from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Release"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a release",
+                    "type": "Release"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Release"
+                    },
+                    "method": "DELETE",
+                    "nickname": "delete_release",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the release to delete.",
+                            "name": "release_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to delete a release from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Delete a release",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects/{project_id}/releases/{release_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_project_by_name",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to find.",
+                            "name": "project_name",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Find a project by name or id",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/byname/{project_name}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "change_project_description",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to use.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The new description of project.",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "For backwards compatibility: Change the description of a project.",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/{project_id}/description"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Component"
+                    },
+                    "method": "GET",
+                    "nickname": "get_components",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get the components from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a list of components from a project",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects/{project_id}/components"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_component_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to add a component to.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Component"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a component to a project.",
+                    "type": "Component"
+                }
+            ],
+            "path": "/projects/{project_id}/components"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Release"
+                    },
+                    "method": "GET",
+                    "nickname": "get_releases_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to get releases from.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the releases for a project.",
+                    "type": "array"
+                }
+            ],
+            "path": "/projects/{project_id}/releases"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_release_for_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to add a release to.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Release"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a release to a project",
+                    "type": "Release"
+                }
+            ],
+            "path": "/projects/{project_id}/releases"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "change_project_name",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to use.",
+                            "name": "project_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The new name of project.",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "For backwards compatibility: Change the name of a project.",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/{project_id}/name"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_project_by_name",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to find.",
+                            "name": "project_name",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Find a project by name or id",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/{project_name}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to update.",
+                            "name": "project_name",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Project"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update an existing project.  Only modified parameters are required.",
+                    "type": "Project"
+                }
+            ],
+            "path": "/projects/{project_name}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "nickname": "delete_project",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name or id of the project to delete.",
+                            "name": "project_name",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Delete an existing project",
+                    "type": "void"
+                }
+            ],
+            "path": "/projects/{project_name}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "Build": {
+            "id": "Build",
+            "properties": {
+                "built": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "Component": {
+            "id": "Component",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "features": {
+                    "items": {
+                        "type": "Feature"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "Configuration": {
+            "id": "Configuration",
+            "properties": {
+                "configurationType": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "DataDrivenProperty": {
+            "id": "DataDrivenProperty",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "requirement": {
+                    "type": "boolean"
+                },
+                "standardValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "Feature": {
+            "id": "Feature",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "Project": {
+            "id": "Project",
+            "properties": {
+                "automationTools": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "components": {
+                    "items": {
+                        "type": "Component"
+                    },
+                    "type": "array"
+                },
+                "configuration": {
+                    "type": "Configuration"
+                },
+                "dataDrivenProperties": {
+                    "items": {
+                        "type": "DataDrivenProperty"
+                    },
+                    "type": "array"
+                },
+                "defaultRelease": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "lastUpdated": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "releases": {
+                    "items": {
+                        "type": "Release"
+                    },
+                    "type": "array"
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "Release": {
+            "id": "Release",
+            "properties": {
+                "builds": {
+                    "items": {
+                        "type": "Build"
+                    },
+                    "type": "array"
+                },
+                "defaultBuild": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "enum": [
+                        "active",
+                        "inactive"
+                    ],
+                    "type": "string"
+                },
+                "target": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/projects",
+    "swaggerVersion": "1.2"
+}

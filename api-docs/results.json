@@ -1,0 +1,506 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "format": "int32",
+                    "method": "GET",
+                    "nickname": "get_result_counts",
+                    "notes": "Useful for gathering statistics.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the number of results for a query.",
+                    "type": "integer"
+                }
+            ],
+            "path": "/results/count"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Result"
+                    },
+                    "method": "GET",
+                    "nickname": "get_results",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for results.",
+                    "type": "array"
+                }
+            ],
+            "path": "/results"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_result",
+                    "notes": "For all the embedded types, if what you specify doesn't exist, this api will try to create them.\nIf you do not specify a testrun, one will be created for you.  If you do not specify any testcase information,\nThis will return an error.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Result"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Create a new result.",
+                    "type": "Result"
+                }
+            ],
+            "path": "/results"
+        },
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "LogEntry"
+                    },
+                    "method": "POST",
+                    "nickname": "add_to_log",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The result id (a string representation of the result's ObjectId).",
+                            "name": "result_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "items": {
+                                "type": "LogEntry"
+                            },
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "array"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Append log entries to a result.",
+                    "type": "array"
+                }
+            ],
+            "path": "/results/{result_id}/log"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_result_by_id",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The result id (a string representation of the result's ObjectId).",
+                            "name": "result_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a result by id.",
+                    "type": "Result"
+                }
+            ],
+            "path": "/results/{result_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_result",
+                    "notes": "You only need to specify the items that have changed.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The result id (a string representation of the result's ObjectId).",
+                            "name": "result_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Result"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update an individual result.",
+                    "type": "Result"
+                }
+            ],
+            "path": "/results/{result_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "BuildReference": {
+            "id": "BuildReference",
+            "properties": {
+                "buildId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ComponentReference": {
+            "id": "ComponentReference",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ConfigurationOverride": {
+            "id": "ConfigurationOverride",
+            "properties": {
+                "isRequirement": {
+                    "type": "boolean"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ConfigurationReference": {
+            "id": "ConfigurationReference",
+            "properties": {
+                "configId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "LogEntry": {
+            "id": "LogEntry",
+            "properties": {
+                "entryTime": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "exceptionClassName": {
+                    "type": "string"
+                },
+                "exceptionMessage": {
+                    "type": "string"
+                },
+                "exceptionStackTrace": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "level": {
+                    "type": "string"
+                },
+                "loggerName": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ProjectReference": {
+            "id": "ProjectReference",
+            "properties": {
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ReleaseReference": {
+            "id": "ReleaseReference",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "releaseId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "Result": {
+            "id": "Result",
+            "properties": {
+                "build": {
+                    "type": "BuildReference"
+                },
+                "component": {
+                    "type": "ComponentReference"
+                },
+                "config": {
+                    "type": "ConfigurationReference"
+                },
+                "configurationOverride": {
+                    "items": {
+                        "type": "ConfigurationOverride"
+                    },
+                    "type": "array"
+                },
+                "files": {
+                    "items": {
+                        "type": "StoredFile"
+                    },
+                    "type": "array"
+                },
+                "finished": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "type": "ResultReference"
+                    },
+                    "type": "array"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "log": {
+                    "items": {
+                        "type": "LogEntry"
+                    },
+                    "type": "array"
+                },
+                "project": {
+                    "type": "ProjectReference"
+                },
+                "reason": {
+                    "type": "string"
+                },
+                "recorded": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "release": {
+                    "type": "ReleaseReference"
+                },
+                "runlength": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "runstatus": {
+                    "type": "string"
+                },
+                "started": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "testcase": {
+                    "type": "TestcaseReference"
+                },
+                "testrun": {
+                    "type": "TestrunReference"
+                }
+            },
+            "required": []
+        },
+        "ResultReference": {
+            "id": "ResultReference",
+            "properties": {
+                "build": {
+                    "type": "BuildReference"
+                },
+                "recorded": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "resultId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "StoredFile": {
+            "id": "StoredFile",
+            "properties": {
+                "chunkSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "length": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "md5": {
+                    "type": "string"
+                },
+                "mimetype": {
+                    "type": "string"
+                },
+                "uploadDate": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        },
+        "TestcaseReference": {
+            "id": "TestcaseReference",
+            "properties": {
+                "automationId": {
+                    "type": "string"
+                },
+                "automationKey": {
+                    "type": "string"
+                },
+                "automationTool": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "testcaseId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "TestrunReference": {
+            "id": "TestrunReference",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "testrunId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/results",
+    "swaggerVersion": "1.2"
+}

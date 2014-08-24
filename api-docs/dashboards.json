@@ -1,0 +1,249 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "BaseDashboard"
+                    },
+                    "method": "GET",
+                    "nickname": "get_dashboards",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for a list of dashboards.",
+                    "type": "array"
+                }
+            ],
+            "path": "/dashboards"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_dashboard",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "BaseDashboard"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a new dashboard configuration",
+                    "type": "BaseDashboard"
+                }
+            ],
+            "path": "/dashboards"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_dashboard_by_id",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The string representation of the objectid for the dashboard.",
+                            "name": "config_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a specific dashboard configuration",
+                    "type": "BaseDashboard"
+                }
+            ],
+            "path": "/dashboards/{config_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_dashboard",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The string representation of the objectid for the dashboard.",
+                            "name": "config_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "BaseDashboard"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a dashboard configuration",
+                    "type": "BaseDashboard"
+                }
+            ],
+            "path": "/dashboards/{config_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "BaseDashboard": {
+            "discriminator": "typeName",
+            "id": "BaseDashboard",
+            "properties": {
+                "dashboardType": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "lastUpdated": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ],
+            "subTypes": [
+                "TestrunListDashboard"
+            ]
+        },
+        "InnerGroup": {
+            "id": "InnerGroup",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "testruns": {
+                    "items": {
+                        "type": "TestrunFinder"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "OuterGroup": {
+            "id": "OuterGroup",
+            "properties": {
+                "groups": {
+                    "items": {
+                        "type": "InnerGroup"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "TestrunFinder": {
+            "id": "TestrunFinder",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "TestrunListDashboard": {
+            "id": "TestrunListDashboard",
+            "properties": {
+                "configuration": {
+                    "items": {
+                        "type": "OuterGroup"
+                    },
+                    "type": "array"
+                },
+                "dashboardType": {
+                    "enum": [
+                        "TestrunListDashboard"
+                    ],
+                    "type": "string"
+                },
+                "display": {
+                    "enum": [
+                        "tall",
+                        "columns"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "lastUpdated": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "staleWarning": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "typeName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "typeName"
+            ]
+        }
+    },
+    "resourcePath": "/dashboards",
+    "swaggerVersion": "1.2"
+}

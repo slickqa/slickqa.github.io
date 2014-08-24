@@ -1,0 +1,212 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "create_stored_file",
+                    "notes": "The chunkSize will be set by the server for you, even if you provide it.  Make sure you supply a valid mimetype.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "StoredFile"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Create a new StoredFile object to store file content for.",
+                    "type": "StoredFile"
+                }
+            ],
+            "path": "/files"
+        },
+        {
+            "operations": [
+                {
+                    "format": "byte",
+                    "method": "GET",
+                    "nickname": "get_file_content",
+                    "notes": "This sets the http header to the mimetype from the stored file, and streams the file to the requester.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id (string representation of the ObjectID) of the stored file.",
+                            "name": "file_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The filename of the stored file.  This is actually ignored, but makes for nice looking URLs.",
+                            "name": "filename",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the content of a file.",
+                    "type": "string"
+                }
+            ],
+            "path": "/files/{file_id}/content/{filename}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_chunk_to_file",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id (string representation of the ObjectID) of the stored file.",
+                            "name": "file_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "binary data of the chunk.",
+                            "format": "byte",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add content to a file (chunk by chunk).",
+                    "type": "StoredFile"
+                }
+            ],
+            "path": "/files/{file_id}/addchunk"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "set_file_content",
+                    "notes": "Use is not recommended unless your file is really small.  Instead add individual chunks to the file.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id (string representation of the ObjectID) of the stored file.",
+                            "name": "file_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "binary data of file",
+                            "format": "byte",
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Upload all the content at once (for small files).",
+                    "type": "StoredFile"
+                }
+            ],
+            "path": "/files/{file_id}/content"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_stored_file",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id (string representation of the ObjectID) of the stored file.",
+                            "name": "file_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get the \"stored file\" or the summary about the file.",
+                    "type": "StoredFile"
+                }
+            ],
+            "path": "/files/{file_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_stored_file",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id (string representation of the ObjectID) of the stored file.",
+                            "name": "file_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "StoredFile"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update the properties of a stored file, you only have to include changed properties",
+                    "type": "StoredFile"
+                }
+            ],
+            "path": "/files/{file_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "StoredFile": {
+            "id": "StoredFile",
+            "properties": {
+                "chunkSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "length": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "md5": {
+                    "type": "string"
+                },
+                "mimetype": {
+                    "type": "string"
+                },
+                "uploadDate": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/files",
+    "swaggerVersion": "1.2"
+}

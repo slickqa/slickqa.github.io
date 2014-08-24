@@ -1,0 +1,323 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_build_report",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The name of the build in the release.",
+                            "name": "build_name",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name of the project.",
+                            "name": "project_name",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "The name of the release in the project.",
+                            "name": "release_name",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get all summary of all the testruns run against a particular build.",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/build-report/{project_name}/{release_name}/{build_name}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "BuildReference": {
+            "id": "BuildReference",
+            "properties": {
+                "buildId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ConfigurationReference": {
+            "id": "ConfigurationReference",
+            "properties": {
+                "configId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ProjectReference": {
+            "id": "ProjectReference",
+            "properties": {
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ReleaseReference": {
+            "id": "ReleaseReference",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "releaseId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ResultsByStatus": {
+            "id": "ResultsByStatus",
+            "properties": {
+                "BROKEN_TEST": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "FAIL": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "NOT_TESTED": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "NO_RESULT": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "PASS": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "SKIPPED": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        },
+        "StoredFile": {
+            "id": "StoredFile",
+            "properties": {
+                "chunkSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "length": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "md5": {
+                    "type": "string"
+                },
+                "mimetype": {
+                    "type": "string"
+                },
+                "uploadDate": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        },
+        "TestPlan": {
+            "id": "TestPlan",
+            "properties": {
+                "createdBy": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "isprivate": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "ProjectReference"
+                },
+                "sharedWith": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "Testrun": {
+            "id": "Testrun",
+            "properties": {
+                "build": {
+                    "type": "BuildReference"
+                },
+                "config": {
+                    "type": "ConfigurationReference"
+                },
+                "dateCreated": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "files": {
+                    "items": {
+                        "type": "StoredFile"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "info": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "ProjectReference"
+                },
+                "release": {
+                    "type": "ReleaseReference"
+                },
+                "runFinished": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "runStarted": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "runtimeOptions": {
+                    "type": "ConfigurationReference"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "TestrunSummary"
+                },
+                "testplan": {
+                    "type": "TestPlan"
+                },
+                "testplanId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "TestrunGroup": {
+            "id": "TestrunGroup",
+            "properties": {
+                "created": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "groupSummary": {
+                    "description": "A combined summary of all the testruns.",
+                    "type": "TestrunSummary"
+                },
+                "grouptype": {
+                    "enum": [
+                        "SERIAL",
+                        "PARALLEL"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "state": {
+                    "enum": [
+                        "TO_BE_RUN",
+                        "RUNNING",
+                        "FINISHED"
+                    ],
+                    "type": "string"
+                },
+                "testruns": {
+                    "items": {
+                        "type": "Testrun"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "TestrunSummary": {
+            "id": "TestrunSummary",
+            "properties": {
+                "resultsByStatus": {
+                    "type": "ResultsByStatus"
+                },
+                "statusListOrdered": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "totalTime": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/build-report",
+    "swaggerVersion": "1.2"
+}

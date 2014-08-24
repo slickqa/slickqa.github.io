@@ -1,0 +1,173 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "Configuration"
+                    },
+                    "method": "GET",
+                    "nickname": "get_all_matching_configurations",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for and find configurations (like Environments).",
+                    "type": "array"
+                }
+            ],
+            "path": "/configurations"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "create_configuration",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Configuration"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Create a new configuration",
+                    "type": "Configuration"
+                }
+            ],
+            "path": "/configurations"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_configuration",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id of the configuration.",
+                            "name": "configuration_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Get a specific configuration by id.",
+                    "type": "Configuration"
+                }
+            ],
+            "path": "/configurations/{configuration_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_configuration",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id of the configuration to update.",
+                            "name": "configuration_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "Configuration"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a configuration",
+                    "type": "void"
+                }
+            ],
+            "path": "/configurations/{configuration_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "nickname": "delete_configuration",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "The id of the configuration to delete.",
+                            "name": "configuration_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Remove a configuration",
+                    "type": "void"
+                }
+            ],
+            "path": "/configurations/{configuration_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "Configuration": {
+            "id": "Configuration",
+            "properties": {
+                "configurationType": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/configurations",
+    "swaggerVersion": "1.2"
+}

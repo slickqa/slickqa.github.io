@@ -1,0 +1,491 @@
+{
+    "apiVersion": "1.0.0",
+    "apis": [
+        {
+            "operations": [
+                {
+                    "items": {
+                        "type": "TestrunGroup"
+                    },
+                    "method": "GET",
+                    "nickname": "get_testrungroups",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "Slick query string",
+                            "name": "q",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Property to sort by.  Use - before property name to reverse sort order.",
+                            "name": "orderby",
+                            "paramType": "query",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Limit the number of items to query.",
+                            "name": "limit",
+                            "paramType": "query",
+                            "type": "integer"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "Skip past a certain number of results.",
+                            "name": "skip",
+                            "paramType": "query",
+                            "type": "integer"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Query for testrungroups.",
+                    "type": "array"
+                }
+            ],
+            "path": "/testrungroups"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_testrungroup",
+                    "notes": "If you do not provide a created date, one will be created.",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "TestrunGroup"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Create a new testrungroup.",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/testrungroups"
+        },
+        {
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "nickname": "remove_testrun_from_testrun_group",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun's id (the string representation of a BSON ObjectId).",
+                            "name": "testrun_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun Group's id (the string representation of a BSON ObjectId).",
+                            "name": "testrungroup_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Remove a testrun from a testrun group",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/testrungroups/{testrungroup_id}/removetestrun/{testrun_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "add_testrun_to_testrun_group",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun's id (the string representation of a BSON ObjectId).",
+                            "name": "testrun_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun Group's id (the string representation of a BSON ObjectId).",
+                            "name": "testrungroup_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Add a testrun to a testrun group",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/testrungroups/{testrungroup_id}/addtestrun/{testrun_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "get_testrungroup_by_id",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun Group's id (the string representation of a BSON ObjectId).",
+                            "name": "testrungroup_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Find a testrungroup by it's id.",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/testrungroups/{testrungroup_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "PUT",
+                    "nickname": "update_testrungroup",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun Group's id (the string representation of a BSON ObjectId).",
+                            "name": "testrungroup_id",
+                            "paramType": "path",
+                            "type": "string"
+                        },
+                        {
+                            "allowMultiple": false,
+                            "name": "body",
+                            "paramType": "body",
+                            "type": "TestrunGroup"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Update a testrun group's properties.",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/testrungroups/{testrungroup_id}"
+        },
+        {
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "nickname": "delete_testrungroup",
+                    "parameters": [
+                        {
+                            "allowMultiple": false,
+                            "description": "A Testrun Group's id (the string representation of a BSON ObjectId).",
+                            "name": "testrungroup_id",
+                            "paramType": "path",
+                            "type": "string"
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "summary": "Remove a testrun group",
+                    "type": "TestrunGroup"
+                }
+            ],
+            "path": "/testrungroups/{testrungroup_id}"
+        }
+    ],
+    "basePath": "http://10.0.21.95:9000/api",
+    "models": {
+        "BuildReference": {
+            "id": "BuildReference",
+            "properties": {
+                "buildId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ConfigurationReference": {
+            "id": "ConfigurationReference",
+            "properties": {
+                "configId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ProjectReference": {
+            "id": "ProjectReference",
+            "properties": {
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ReleaseReference": {
+            "id": "ReleaseReference",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "releaseId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "ResultsByStatus": {
+            "id": "ResultsByStatus",
+            "properties": {
+                "BROKEN_TEST": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "FAIL": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "NOT_TESTED": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "NO_RESULT": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "PASS": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "SKIPPED": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        },
+        "StoredFile": {
+            "id": "StoredFile",
+            "properties": {
+                "chunkSize": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "length": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "md5": {
+                    "type": "string"
+                },
+                "mimetype": {
+                    "type": "string"
+                },
+                "uploadDate": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        },
+        "TestPlan": {
+            "id": "TestPlan",
+            "properties": {
+                "createdBy": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "isprivate": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "ProjectReference"
+                },
+                "sharedWith": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "Testrun": {
+            "id": "Testrun",
+            "properties": {
+                "build": {
+                    "type": "BuildReference"
+                },
+                "config": {
+                    "type": "ConfigurationReference"
+                },
+                "dateCreated": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "files": {
+                    "items": {
+                        "type": "StoredFile"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "info": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "ProjectReference"
+                },
+                "release": {
+                    "type": "ReleaseReference"
+                },
+                "runFinished": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "runStarted": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "runtimeOptions": {
+                    "type": "ConfigurationReference"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "TestrunSummary"
+                },
+                "testplan": {
+                    "type": "TestPlan"
+                },
+                "testplanId": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                }
+            },
+            "required": []
+        },
+        "TestrunGroup": {
+            "id": "TestrunGroup",
+            "properties": {
+                "created": {
+                    "description": "The number of milliseconds since EPOCH GMT",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "groupSummary": {
+                    "description": "A combined summary of all the testruns.",
+                    "type": "TestrunSummary"
+                },
+                "grouptype": {
+                    "enum": [
+                        "SERIAL",
+                        "PARALLEL"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A String representation of a BSON ObjectId",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "state": {
+                    "enum": [
+                        "TO_BE_RUN",
+                        "RUNNING",
+                        "FINISHED"
+                    ],
+                    "type": "string"
+                },
+                "testruns": {
+                    "items": {
+                        "type": "Testrun"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": []
+        },
+        "TestrunSummary": {
+            "id": "TestrunSummary",
+            "properties": {
+                "resultsByStatus": {
+                    "type": "ResultsByStatus"
+                },
+                "statusListOrdered": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "totalTime": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": []
+        }
+    },
+    "resourcePath": "/testrungroups",
+    "swaggerVersion": "1.2"
+}

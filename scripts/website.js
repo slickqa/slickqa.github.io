@@ -21,10 +21,10 @@ angular.module('SlickWebsite', ['ngAnimate', 'ngCookies'])
         };
 
         $scope.navMode = function() {
-            if($cookieStore.get('nav-mode') == "pinned") {
-                return "pinned";
-            } else {
+            if($cookieStore.get('nav-mode') == "overlay") {
                 return "overlay";
+            } else {
+                return "pinned";
             }
         };
 

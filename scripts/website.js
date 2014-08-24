@@ -1,6 +1,6 @@
 angular.module('SlickWebsite', ['ngAnimate', 'ngCookies'])
     .controller('MainController', function($scope, $cookieStore) {
-        var show = true;
+        var show = false;
 
         $scope.toggleNav = function($event) {
             show = !show;
@@ -21,10 +21,10 @@ angular.module('SlickWebsite', ['ngAnimate', 'ngCookies'])
         };
 
         $scope.navMode = function() {
-            if($cookieStore.get('nav-mode') == "overlay") {
-                return "overlay";
-            } else {
+            if($cookieStore.get('nav-mode') == "pinned") {
                 return "pinned";
+            } else {
+                return "overlay";
             }
         };
 

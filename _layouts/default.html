@@ -26,7 +26,7 @@
                 </div>
                 <a class="clickable-text" href="/">Home</a><br />
                 {% for link in site.pages %}
-                    {% unless link.title contains 'Home' %}
+                    {% unless link.title contains 'Slick Test Manager' %}
                         <a class="clickable-text" href="{{ link.url }}">{{ link.title }}</a><br />
                     {% endunless %}
                 {% endfor %}

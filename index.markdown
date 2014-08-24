@@ -18,11 +18,12 @@ What can it do?
 
 A short feature list is:
 
-* Various ways to categorize tests, including by project, component, feature, and arbitrary tags.
-* Test automation integration without a predefined test tool!  You can use whatever you want
-* Documented REST Api
-* Put test into testplans to define what should be run, and how it should be run
-* Lots of "Manager Porn" or graphs, trends, and debugging information
+* Various ways to categorize tests, including by [project](/features/project.html), [component](/features/project.html), [feature](/features/project.html), and arbitrary tags.
+* [Test automation](/features/testautomation.html) [integration](/features/clients.html) without a predefined test tool!  You can use whatever you want
+* Documented [REST Api](/features/rest.html)
+* Put test into [testplans](/features/testplans.html) to define what should be run, and how it should be run
+* Lots of "Manager Porn" or [graphs](/features/testruns.html), [trends](/features/result.html), [dashboards](/features/dashboards.html), and [debugging information](/features/result.html)
+* [and more](/features.html)
 
 Let me See!
 -----------

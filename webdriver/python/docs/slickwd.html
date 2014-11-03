@@ -24,7 +24,7 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
   
 
   
@@ -113,7 +113,7 @@
     <li>slickwd API Documentation</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/slickwd.txt" rel="nofollow"> View page source</a>
+          <a href="sources/slickwd.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -125,7 +125,7 @@
 <span id="slickwd-api-documentation"></span><h1>slickwd API Documentation<a class="headerlink" href="#module-slickwd" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="slickwd.Browser">
-<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Browser</tt><big>(</big><em>browser_type</em>, <em>remote_url=None</em>, <em>default_timeout=30</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#Browser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Browser</tt><big>(</big><em>browser_type</em>, <em>remote_url=None</em>, <em>default_timeout=30</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Browser is the primary interface you have to automate a browser.  An instance of Browser has the same
 methods no matter which browser it is you launch.  It also abstracts away the creation of remote browser
 instances when using <a class="reference external" href="https://code.google.com/p/selenium/wiki/Grid2">Selenium Grid</a> or <a class="reference external" href="http://selenium-python.readthedocs.org/en/latest/installation.html#downloading-selenium-server">Selenium Server</a>.</p>
@@ -142,19 +142,19 @@ by multiple tests / functions.  See <a class="reference internal" href="page-cla
 <p>For more examples, see <a class="reference internal" href="examples.html"><em>Examples</em></a>.</p>
 <dl class="method">
 <dt id="slickwd.Browser.go_to">
-<tt class="descname">go_to</tt><big>(</big><em>url</em>, <em>log=True</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#Browser.go_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.go_to" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">go_to</tt><big>(</big><em>url</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.go_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.go_to" title="Permalink to this definition">¶</a></dt>
 <dd><p>Navigate the browser to the url provided</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="slickwd.Browser.quit">
-<tt class="descname">quit</tt><big>(</big><em>log=True</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#Browser.quit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.quit" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">quit</tt><big>(</big><em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.quit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.quit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close the browser and quit the current session</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="slickwd.Browser.wait_for_page">
-<tt class="descname">wait_for_page</tt><big>(</big><em>page</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#Browser.wait_for_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.wait_for_page" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wait_for_page</tt><big>(</big><em>page</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.wait_for_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.wait_for_page" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait for a page class (container) to be present.
 This will cause that the page&#8217;s <em>is_current_page</em> method to be called until it returns true or a timeout
 is reached.</p>
@@ -164,7 +164,7 @@ is reached.</p>
 
 <dl class="class">
 <dt id="slickwd.BrowserType">
-<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">BrowserType</tt><a class="reference internal" href="_modules/slickwd.html#BrowserType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.BrowserType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">BrowserType</tt><a class="reference internal" href="modules/slickwd.html#BrowserType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.BrowserType" title="Permalink to this definition">¶</a></dt>
 <dd><p>This enum is to help identify browsers to launch.  The values are the desired capabilities.  All
 values are static properties on the BrowserType class.</p>
 <p>Example Use:</p>
@@ -220,18 +220,18 @@ values are static properties on the BrowserType class.</p>
 
 <dl class="class">
 <dt id="slickwd.Container">
-<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Container</tt><a class="reference internal" href="_modules/slickwd.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Container" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Container</tt><a class="reference internal" href="modules/slickwd.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Container" title="Permalink to this definition">¶</a></dt>
 <dd><p>A generic container for structuring multiple <em>WebElementLocator</em> into groupings that help programmers find the right
 shared definition.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="slickwd.Find">
-<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Find</tt><big>(</big><em>by</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#Find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Find" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Find</tt><big>(</big><em>by</em>, <em>value</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Find" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a factory to make it easy to create ways of finding elements.</p>
 <dl class="method">
 <dt id="slickwd.Find.describe">
-<tt class="descname">describe</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/slickwd.html#Find.describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Find.describe" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">describe</tt><big>(</big><big>)</big><a class="reference internal" href="modules/slickwd.html#Find.describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Find.describe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Describe this finder (including any or&#8217;ed finders)</p>
 </dd></dl>
 
@@ -239,28 +239,28 @@ shared definition.</p>
 
 <dl class="class">
 <dt id="slickwd.Timer">
-<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Timer</tt><big>(</big><em>length_in_seconds</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#Timer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Timer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Timer</tt><big>(</big><em>length_in_seconds</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Timer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Timer" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Timer tracks the start time (at creation) and will tell you if it is past the timeout value.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="slickwd.WebElementLocator">
-<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">WebElementLocator</tt><big>(</big><em>name</em>, <em>finder</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#WebElementLocator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">WebElementLocator</tt><big>(</big><em>name</em>, <em>finder</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="slickwd.WebElementLocator.describe">
-<tt class="descname">describe</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/slickwd.html#WebElementLocator.describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.describe" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">describe</tt><big>(</big><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.describe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Describe the current element.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="slickwd.WebElementLocator.find_all_elements_matching">
-<tt class="descname">find_all_elements_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#WebElementLocator.find_all_elements_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_all_elements_matching" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">find_all_elements_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_all_elements_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_all_elements_matching" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find any web elements matching any one of the finders.  This method returns a list.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="slickwd.WebElementLocator.find_element_matching">
-<tt class="descname">find_element_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em><big>)</big><a class="reference internal" href="_modules/slickwd.html#WebElementLocator.find_element_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_element_matching" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">find_element_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_element_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_element_matching" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a single element matching the finder(s) that make up this locator.</p>
 </dd></dl>
 
@@ -310,15 +310,15 @@ shared definition.</p>
             HAS_SOURCE:  true
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="static/jquery.js"></script>
+      <script type="text/javascript" src="static/underscore.js"></script>
+      <script type="text/javascript" src="static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="static/js/theme.js"></script>
   
 
   

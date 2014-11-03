@@ -21,7 +21,7 @@ Example Usage
 
 What does a test using this fabulous framework look like?  Let me show you:
 
-{% highlight python linenos %}
+{% highlight python %}
 
 from slickwd import BrowserType, Browser, Container, WebElementLocator, Find
 from nose import with_setup

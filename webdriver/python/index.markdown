@@ -66,7 +66,7 @@ def test_google_search():
     browser.wait_for_page(SearchResultsPage)
     assert_regexp_matches(browser.get_page_text(), '.*SlickQA:.*')
 
-{% endgihlight %}
+{% endhighlight %}
 
 The test is written so the code can be read, easily modified if something in the page is changed,
 and allow for code reuse (page classes).  Normally page classes would be held in a different module

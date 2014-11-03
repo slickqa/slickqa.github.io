@@ -21,7 +21,7 @@ Example Usage
 
 What does a test using this fabulous framework look like?  Let me show you:
 
-```python
+{% highlight python linenos %}
 from slickwd import BrowserType, Browser, Container, WebElementLocator, Find
 from nose import with_setup
 from nose.tools import assert_regexp_matches
@@ -64,7 +64,8 @@ def test_google_search():
     browser.click(GoogleSearchPage.Search_Button)
     browser.wait_for_page(SearchResultsPage)
     assert_regexp_matches(browser.get_page_text(), '.*SlickQA:.*')
-```
+
+{% endgihlight %}
 
 The test is written so the code can be read, easily modified if something in the page is changed,
 and allow for code reuse (page classes).  Normally page classes would be held in a different module

@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Examples &mdash; slick-webdriver 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="slick-webdriver 1.0 documentation" href="index.html"/>
+        <link rel="next" title="Using the Webdriver APIs" href="raw-webdriver.html"/>
+        <link rel="prev" title="Locators" href="locators.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> slick-webdriver</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#web-testing-overview">Web Testing Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#creating-page-classes">Creating Page Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#writing-tests">Writing Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="page-classes.html">Page Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="page-classes.html#what-are-page-classes">What Are Page Classes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="page-classes.html#static-page-classes-flat">Static Page Classes (Flat)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="page-classes.html#nested-page-classes">Nested Page Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="locators.html">Locators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#what-are-locators">What are Locators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#common-strategies">Common Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#more-complex-strategies">More Complex Strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-example">Simple Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nested-page-class-example">Nested Page Class Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="raw-webdriver.html">Using the Webdriver APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="raw-webdriver.html#why-you-might-need-them">Why you might need them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raw-webdriver.html#how-to-get-to-them">How to get to them</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slickwd.html">slickwd API Documentation</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">slick-webdriver</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Examples</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/examples.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>Below you will find various examples.  These examples are explained here (in detail), but the source for them is
+available from <a class="reference external" href="https://github.com/slickqa/slick-webdriver-python/tree/master/examples">Github</a>.</p>
+<div class="section" id="simple-example">
+<h2>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h2>
+<p>The following is the simple example, which is a python test (written using
+<a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a>).  The test in this example loads the google home page,
+and searches for <em>Slick Test Manager</em> and ensures a particular page is in the results:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">slickwd</span> <span class="kn">import</span> <span class="n">BrowserType</span><span class="p">,</span> <span class="n">Browser</span><span class="p">,</span> <span class="n">Container</span><span class="p">,</span> <span class="n">WebElementLocator</span><span class="p">,</span> <span class="n">Find</span>
+<span class="kn">from</span> <span class="nn">nose</span> <span class="kn">import</span> <span class="n">with_setup</span>
+<span class="kn">from</span> <span class="nn">nose.tools</span> <span class="kn">import</span> <span class="n">assert_regexp_matches</span>
+
+<span class="c"># Page Classes --------------------------------------------------</span>
+<span class="k">class</span> <span class="nc">GoogleSearchPage</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="n">Search_Query_Text_Field</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Box&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;q&quot;</span><span class="p">))</span>
+    <span class="n">Search_Button</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Button&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;btnG&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">browser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">SearchResultsPage</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="n">Results_Div</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Results Div&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="s">&quot;ires&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">browser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">SearchResultsPage</span><span class="o">.</span><span class="n">Results_Div</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c"># Tests ---------------------------------------------------------</span>
+<span class="n">browser</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+<span class="k">def</span> <span class="nf">s</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">Browser</span><span class="p">(</span><span class="n">BrowserType</span><span class="o">.</span><span class="n">FIREFOX</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+<span class="nd">@with_setup</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cleanup</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_google_search</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">go_to</span><span class="p">(</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">wait_for_page</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">click_and_type</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span><span class="p">,</span> <span class="s">&quot;Slick Test Manager&quot;</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="o">.</span><span class="n">Search_Button</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">wait_for_page</span><span class="p">(</span><span class="n">SearchResultsPage</span><span class="p">)</span>
+    <span class="n">assert_regexp_matches</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">get_page_text</span><span class="p">(),</span> <span class="s">&#39;.*SlickQA:.*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This may seem like a lot, but normally the <a class="reference internal" href="page-classes.html"><em>Page Classes</em></a> would be in a different module that you would import.
+Let&#8217;s start with the page classes and explain what they are here.</p>
+</div>
+<div class="section" id="nested-page-class-example">
+<h2>Nested Page Class Example<a class="headerlink" href="#nested-page-class-example" title="Permalink to this headline">¶</a></h2>
+<p>There are multiple files to analyze here so we will go through them one by one.  First our test, it&#8217;s fairly simple.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="raw-webdriver.html" class="btn btn-neutral float-right" title="Using the Webdriver APIs"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="locators.html" class="btn btn-neutral" title="Locators"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Jason Corbett.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

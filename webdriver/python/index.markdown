@@ -16,6 +16,11 @@ simpler and more maintainable by providing:
   * Event based api where you can add your own pre and post actions as part of standard calls (like taking a screenshot on click)
   * more good tidbits
 
+Documentation
+-------------
+
+Full documentation (including examples) is available [on this site](/webdriver/python/docs).
+
 Example Usage
 -------------
 

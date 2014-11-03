@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>slickwd &mdash; slick-webdriver 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="slick-webdriver 1.0 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> slick-webdriver</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#web-testing-overview">Web Testing Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#creating-page-classes">Creating Page Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started.html#writing-tests">Writing Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../page-classes.html">Page Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../page-classes.html#what-are-page-classes">What Are Page Classes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page-classes.html#static-page-classes-flat">Static Page Classes (Flat)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page-classes.html#nested-page-classes">Nested Page Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../locators.html">Locators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../locators.html#what-are-locators">What are Locators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../locators.html#common-strategies">Common Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../locators.html#more-complex-strategies">More Complex Strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#simple-example">Simple Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#nested-page-class-example">Nested Page Class Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../raw-webdriver.html">Using the Webdriver APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../raw-webdriver.html#why-you-might-need-them">Why you might need them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../raw-webdriver.html#how-to-get-to-them">How to get to them</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../slickwd.html">slickwd API Documentation</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">slick-webdriver</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>slickwd</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for slickwd</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;jcorbett&#39;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.desired_capabilities</span> <span class="kn">import</span> <span class="n">DesiredCapabilities</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+<span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="kn">import</span> <span class="n">WebDriverException</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<div class="viewcode-block" id="BrowserType"><a class="viewcode-back" href="../slickwd.html#slickwd.BrowserType">[docs]</a><span class="k">class</span> <span class="nc">BrowserType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This enum is to help identify browsers to launch.  The values are the desired capabilities.  All</span>
+<span class="sd">    values are static properties on the BrowserType class.</span>
+
+<span class="sd">    Example Use::</span>
+
+<span class="sd">        from slickwd import Browser, BrowserType</span>
+
+<span class="sd">        browser = Browser(BrowserType.CHROME)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">CHROME</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">CHROME</span><span class="p">,</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Chrome Browser (you must download</span>
+<span class="sd">    `chromedriver &lt;https://sites.google.com/a/chromium.org/chromedriver/downloads&gt;`_ separately and place in path)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FIREFOX</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">FIREFOX</span><span class="p">,</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Firefox Browser&quot;&quot;&quot;</span>
+    <span class="n">IE</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">INTERNETEXPLORER</span><span class="p">,</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Ie</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Internet Explorer Browser (you must download `internet explorer driver</span>
+<span class="sd">    &lt;https://code.google.com/p/selenium/wiki/InternetExplorerDriver&gt;`_ separately and place it in your path)&quot;&quot;&quot;</span>
+    <span class="n">OPERA</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">OPERA</span><span class="p">,</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Opera</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Opera Browser&quot;&quot;&quot;</span>
+    <span class="n">SAFARI</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">SAFARI</span><span class="p">,</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Safari</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Safari Browser&quot;&quot;&quot;</span>
+    <span class="n">HTMLUNITWITHJS</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">HTMLUNITWITHJS</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;HTMLUnit with Javascript enabled, only for use with Remote&quot;&quot;&quot;</span>
+    <span class="n">IPHONE</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">IPHONE</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">IPAD</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">IPAD</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">ANDROID</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">ANDROID</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">PHANTOMJS</span> <span class="o">=</span> <span class="p">(</span><span class="n">DesiredCapabilities</span><span class="o">.</span><span class="n">PHANTOMJS</span><span class="p">,</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">PhantomJS</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;PhantomJS headless browser (must download separately, `phantomjs homepage &lt;http://phantomjs.org/&gt;`_)&quot;&quot;&quot;</span>
+
+</div>
+<div class="viewcode-block" id="Find"><a class="viewcode-back" href="../slickwd.html#slickwd.Find">[docs]</a><span class="k">class</span> <span class="nc">Find</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is a factory to make it easy to create ways of finding elements.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finders</span> <span class="o">=</span> <span class="p">[(</span><span class="n">by</span><span class="p">,</span> <span class="n">value</span><span class="p">),]</span>
+
+
+<div class="viewcode-block" id="Find.describe"><a class="viewcode-back" href="../slickwd.html#slickwd.Find.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Describe this finder (including any or&#39;ed finders)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&quot; or &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">Find</span><span class="o">.</span><span class="n">describe_single_finder</span><span class="p">(</span><span class="n">finder</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">finder</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">finder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finders</span><span class="p">])</span>
+</div>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">describe_single_finder</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;id </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;name </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;class name </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">LINK_TEXT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;link text </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;link text containing </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;css selector </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;xpath {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;tag name </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">Or</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">finder</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finders</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">finder</span><span class="o">.</span><span class="n">finders</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_id</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">id_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">id_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_name</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="n">name_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_class_name</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">class_name_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span> <span class="n">class_name_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_link_text</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">link_text_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">LINK_TEXT</span><span class="p">,</span> <span class="n">link_text_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_partial_link_text</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">partial_link_text_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">,</span> <span class="n">partial_link_text_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_css_selector</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">css_selector_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CSS_SELECTOR</span><span class="p">,</span> <span class="n">css_selector_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_xpath</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">xpath_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span> <span class="n">xpath_value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">by_tag_name</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">tag_name_value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Find</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="n">tag_name_value</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Timer"><a class="viewcode-back" href="../slickwd.html#slickwd.Timer">[docs]</a><span class="k">class</span> <span class="nc">Timer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A Timer tracks the start time (at creation) and will tell you if it is past the timeout value.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length_in_seconds</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">length_in_seconds</span>
+
+    <span class="k">def</span> <span class="nf">is_past_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span>
+
+</div>
+<div class="viewcode-block" id="WebElementLocator"><a class="viewcode-back" href="../slickwd.html#slickwd.WebElementLocator">[docs]</a><span class="k">class</span> <span class="nc">WebElementLocator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">finder</span><span class="p">):</span>
+        <span class="c"># id=None, xpath=None, link_text=None, partial_link_text=None, name=None, href=None,</span>
+        <span class="c"># tag_name=None, class_name=None, css_selector=None):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finder</span> <span class="o">=</span> <span class="n">finder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s">&quot;{} found by {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">finder</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;slickwd.WebElementLocator&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WebElementLocator.find_all_elements_matching"><a class="viewcode-back" href="../slickwd.html#slickwd.WebElementLocator.find_all_elements_matching">[docs]</a>    <span class="k">def</span> <span class="nf">find_all_elements_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wd_browser</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find any web elements matching any one of the finders.  This method returns a list.&quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="WebElementLocator.find_element_matching"><a class="viewcode-back" href="../slickwd.html#slickwd.WebElementLocator.find_element_matching">[docs]</a>    <span class="k">def</span> <span class="nf">find_element_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wd_browser</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find a single element matching the finder(s) that make up this locator.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Attempting 1 time to find element {} .&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">()))</span>
+            <span class="k">for</span> <span class="n">finder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finder</span><span class="o">.</span><span class="n">finders</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">wd_browser</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">finder</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">finder</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">except</span> <span class="n">WebDriverException</span><span class="p">:</span>
+                    <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Unable to find element {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">()))</span>
+                <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">retval</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Waiting for up to {:.2f} seconds for element {} to be available.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">()))</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">timer</span><span class="o">.</span><span class="n">is_past_timeout</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">finder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finder</span><span class="o">.</span><span class="n">finders</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">retval</span> <span class="o">=</span>  <span class="n">wd_browser</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">finder</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">finder</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">except</span> <span class="n">WebDriverException</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="k">if</span> <span class="n">retval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Found element {} using locator property {} after {:.2f} seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">describe_single_finder</span><span class="p">(</span><span class="n">finder</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">finder</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+                        <span class="k">return</span> <span class="n">retval</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="WebElementLocator.describe"><a class="viewcode-back" href="../slickwd.html#slickwd.WebElementLocator.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Describe the current element.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
+</div></div>
+<div class="viewcode-block" id="Browser"><a class="viewcode-back" href="../slickwd.html#slickwd.Browser">[docs]</a><span class="k">class</span> <span class="nc">Browser</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Browser is the primary interface you have to automate a browser.  An instance of Browser has the same</span>
+<span class="sd">    methods no matter which browser it is you launch.  It also abstracts away the creation of remote browser</span>
+<span class="sd">    instances when using `Selenium Grid &lt;https://code.google.com/p/selenium/wiki/Grid2&gt;`_ or `Selenium Server</span>
+<span class="sd">    &lt;http://selenium-python.readthedocs.org/en/latest/installation.html#downloading-selenium-server&gt;`_.</span>
+
+<span class="sd">    Most actions that the Browser has takes an argument called locator, which should be an instance of</span>
+<span class="sd">    :class:`.WebElementLocator`.  These are normally arranged into Page classes to make them reusable</span>
+<span class="sd">    by multiple tests / functions.  See :doc:`page-classes`.</span>
+
+<span class="sd">    To create an instance of Browser, provide the browser type you would like, and the remote_url (if any)::</span>
+
+<span class="sd">        from slickwd import Browser, BrowserType</span>
+
+<span class="sd">        browser = Browser(BrowserType.PHANTOMJS)</span>
+<span class="sd">        browser.go_to(&quot;http://www.google.com&quot;)</span>
+
+<span class="sd">    For more examples, see :doc:`examples`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser_type</span><span class="p">,</span> <span class="n">remote_url</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">default_timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new browser session.  The only required parameter *browser_type* can be</span>
+<span class="sd">        an instance of the *BrowserType* enum, a dictionary (like those from webdriver&#39;s desired_capabilities),</span>
+<span class="sd">        or a string identifying the name of the browser (must correspond to a name in the *BrowserType* enum).</span>
+
+<span class="sd">        If you use a remote_url, it should point to a selenium remote server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span> <span class="o">=</span> <span class="n">default_timeout</span>
+
+        <span class="c"># tame the huge logs from webdriver</span>
+        <span class="n">wdlogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;selenium.webdriver&#39;</span><span class="p">)</span>
+        <span class="n">wdlogger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;slickwd.Browser&quot;</span><span class="p">)</span>
+        <span class="n">browser_name</span> <span class="o">=</span> <span class="n">browser_type</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="n">BrowserType</span><span class="p">):</span>
+            <span class="n">browser_name</span> <span class="o">=</span> <span class="n">browser_type</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s">&#39;browserName&#39;</span> <span class="ow">in</span> <span class="n">browser_type</span><span class="p">:</span>
+            <span class="n">browser_name</span> <span class="o">=</span> <span class="n">browser_type</span><span class="p">[</span><span class="n">browser_name</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;New browser instance requested with browser_type={} and remote_url={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">browser_name</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">remote_url</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">browser_type</span> <span class="o">=</span> <span class="n">BrowserType</span><span class="p">[</span><span class="n">browser_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Invalid browser name: </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">browser_type</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">remote_url</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s">&#39;browserName&#39;</span> <span class="ow">in</span> <span class="n">browser_type</span><span class="p">:</span>
+                <span class="n">browser_name</span> <span class="o">=</span> <span class="n">browser_type</span><span class="p">[</span><span class="s">&#39;browserName&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">browser_name</span> <span class="o">==</span> <span class="s">&#39;internet explorer&#39;</span><span class="p">:</span>
+                    <span class="n">browser_name</span> <span class="o">=</span> <span class="s">&#39;ie&#39;</span>
+                <span class="k">if</span> <span class="n">browser_name</span> <span class="o">==</span> <span class="s">&#39;htmlunit&#39;</span><span class="p">:</span>
+                    <span class="n">browser_name</span> <span class="o">=</span> <span class="s">&#39;htmlunitwithjs&#39;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">browser_type</span> <span class="o">=</span> <span class="n">BrowserType</span><span class="p">[</span><span class="n">browser_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Invalid browser: </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">browser_name</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="n">BrowserType</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Unable to create browser of type </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">browser_type</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">browser_type</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Browser of type </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s"> can only be launched remotely, which means you must provide a remote_url.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">browser_type</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_url</span> <span class="o">=</span> <span class="n">remote_url</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">browser_type</span> <span class="o">=</span> <span class="n">browser_type</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Creating a new browser (locally connected) of type {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">browser_type</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span> <span class="o">=</span> <span class="n">browser_type</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="n">BrowserType</span><span class="p">):</span>
+                <span class="n">browser_type</span> <span class="o">=</span> <span class="n">browser_type</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">browser_type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Unable to create a browser of type </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">, when using remote_url browser_type should be either an instance of BrowserType or a dictionary containing desired capabilities.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">browser_type</span><span class="p">)))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_url</span> <span class="o">=</span> <span class="n">remote_url</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">browser_type</span> <span class="o">=</span> <span class="n">browser_type</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Creating a new browser (through remote connection </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">) with desired capabilities of {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remote_url</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">browser_type</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Remote</span><span class="p">(</span><span class="n">remote_url</span><span class="p">,</span> <span class="n">browser_type</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Browser.quit"><a class="viewcode-back" href="../slickwd.html#slickwd.Browser.quit">[docs]</a>    <span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Close the browser and quit the current session&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Calling quit on browser instance.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="Browser.go_to"><a class="viewcode-back" href="../slickwd.html#slickwd.Browser.go_to">[docs]</a>    <span class="k">def</span> <span class="nf">go_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Navigate the browser to the url provided&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Navigating to url {}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">url</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="Browser.wait_for_page"><a class="viewcode-back" href="../slickwd.html#slickwd.Browser.wait_for_page">[docs]</a>    <span class="k">def</span> <span class="nf">wait_for_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wait for a page class (container) to be present.</span>
+<span class="sd">        This will cause that the page&#39;s *is_current_page* method to be called until it returns true or a timeout</span>
+<span class="sd">        is reached.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># create an instance of the page</span>
+        <span class="n">page_instance</span> <span class="o">=</span> <span class="n">page</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">page_instance</span><span class="p">,</span> <span class="n">Container</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span>
+
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Waiting for up to {:.2f} seconds for page {} to be the current page.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">),</span> <span class="n">page_instance</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+
+        <span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">timer</span><span class="o">.</span><span class="n">is_past_timeout</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">page_instance</span><span class="o">.</span><span class="n">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="c"># sleep a quarter of a second</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># The timer.is_past_timeout() returned true and that kicked us out of the loop</span>
+            <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Waited {:.2f} seconds for page {} to exist and it never returned true from is_current_page.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">),</span> <span class="n">page_instance</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+            <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Waited {:.2f} seconds for page {} to exist and it never returned true from is_current_page.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">),</span> <span class="n">page_instance</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Found page {} after {:.2f} seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page_instance</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span>
+        <span class="k">return</span> <span class="n">locator</span><span class="o">.</span><span class="n">find_element_matching</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">locator</span><span class="o">.</span><span class="n">find_element_matching</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Unable to find element {} after waiting for {:.2f} seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Clicking on element {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">()))</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">click_and_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">locator</span><span class="o">.</span><span class="n">find_element_matching</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Unable to find element {} after waiting for {:.2f} seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Clicking on element {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">()))</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Typing </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s"> into element {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">()))</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">get_page_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s">&quot;html&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span>
+
+
+
+</div>
+<div class="viewcode-block" id="Container"><a class="viewcode-back" href="../slickwd.html#slickwd.Container">[docs]</a><span class="k">class</span> <span class="nc">Container</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A generic container for structuring multiple *WebElementLocator* into groupings that help programmers find the right</span>
+<span class="sd">    shared definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&quot;Page&quot;</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;is_current_page was not implemented on class: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+</pre></div></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Jason Corbett.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

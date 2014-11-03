@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Page Classes &mdash; slick-webdriver 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="slick-webdriver 1.0 documentation" href="index.html"/>
+        <link rel="next" title="Locators" href="locators.html"/>
+        <link rel="prev" title="Getting Started Tutorial" href="getting-started.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> slick-webdriver</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#web-testing-overview">Web Testing Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#creating-page-classes">Creating Page Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#writing-tests">Writing Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Page Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-are-page-classes">What Are Page Classes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#static-page-classes-flat">Static Page Classes (Flat)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nested-page-classes">Nested Page Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="locators.html">Locators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#what-are-locators">What are Locators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#common-strategies">Common Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#more-complex-strategies">More Complex Strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#simple-example">Simple Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#nested-page-class-example">Nested Page Class Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="raw-webdriver.html">Using the Webdriver APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="raw-webdriver.html#why-you-might-need-them">Why you might need them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raw-webdriver.html#how-to-get-to-them">How to get to them</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slickwd.html">slickwd API Documentation</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">slick-webdriver</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Page Classes</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/page-classes.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="page-classes">
+<h1>Page Classes<a class="headerlink" href="#page-classes" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="what-are-page-classes">
+<h2>What Are Page Classes?<a class="headerlink" href="#what-are-page-classes" title="Permalink to this headline">¶</a></h2>
+<p>Page classes are an abstraction that allows you to define the elements you want to use in your tests and organize
+them.  Page classes are a common technique in web testing, and as the name implies you can organize the elements
+by what page they are on.  You can get more fine grained than that as well, defining which tab (whithin a page)
+an element is on as an example.</p>
+<p>There are two common styles of page classes, and which one you use depends on how deep the structure of the web
+site you are testing is.</p>
+</div>
+<div class="section" id="static-page-classes-flat">
+<h2>Static Page Classes (Flat)<a class="headerlink" href="#static-page-classes-flat" title="Permalink to this headline">¶</a></h2>
+<p>Static page classes are named that way because the web element locators in them are typically static.  This
+allows mostly for a simple hierarchy in your organization structure.  Your structure will normally have
+a page class that containes elements on that page.  This works well for small websites, or web apps with
+a simple flat navigation structure.</p>
+</div>
+<div class="section" id="nested-page-classes">
+<h2>Nested Page Classes<a class="headerlink" href="#nested-page-classes" title="Permalink to this headline">¶</a></h2>
+<p>This style uses instances of page classes, with elements and other page classes inside each container.  Normally
+you would instantiate the top node, and you get all other nested nodes created as a result.  This can help with
+specifying configuration parameters to the hierarchy as well as changing element locators as a result of such
+configuration.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="locators.html" class="btn btn-neutral float-right" title="Locators"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting-started.html" class="btn btn-neutral" title="Getting Started Tutorial"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Jason Corbett.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

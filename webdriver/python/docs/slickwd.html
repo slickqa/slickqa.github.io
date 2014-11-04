@@ -57,10 +57,9 @@
         
         
             <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started Tutorial</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting-started.html#web-testing-overview">Web Testing Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting-started.html#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#creating-page-classes">Creating Page Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting-started.html#writing-tests">Writing Tests</a></li>
 </ul>
 </li>
@@ -149,7 +148,7 @@ by multiple tests / functions.  See <a class="reference internal" href="page-cla
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>locator</strong> (<em>WebElementLocator</em>) &#8211; the locator that specifies which element to click on</li>
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator that specifies which element to click on (usually defined on a Page class)</li>
 <li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
 <li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
 </ul>
@@ -158,7 +157,7 @@ by multiple tests / functions.  See <a class="reference internal" href="page-cla
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The reference to this Browser instance.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Browser</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></p>
 </td>
 </tr>
 </tbody>
@@ -174,7 +173,7 @@ by multiple tests / functions.  See <a class="reference internal" href="page-cla
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>locator</strong> (<em>WebElementLocator</em>) &#8211; the locator that specifies which element to click on and type in</li>
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator that specifies which element to click on and type in (usually defined on a Page class)</li>
 <li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
 <li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
 </ul>
@@ -183,7 +182,7 @@ by multiple tests / functions.  See <a class="reference internal" href="page-cla
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The reference to this Browser instance.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Browser</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></p>
 </td>
 </tr>
 </tbody>
@@ -200,7 +199,7 @@ any logging.  If you specify 0 for the timeout, the framework will only look for
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>locator</strong> (<em>WebElementLocator</em>) &#8211; the locator to look for</li>
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator to look for (usually defined on a Page class)</li>
 <li><strong>timeout</strong> (<em>int or float</em>) &#8211; The amount of time (in seconds) to look before returning False</li>
 <li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
 </ul>
@@ -243,6 +242,16 @@ root element on the page.</p>
 <dt id="slickwd.Browser.quit">
 <tt class="descname">quit</tt><big>(</big><em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.quit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.quit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close the browser and quit the current session</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">this instance for chaining of methods</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -251,6 +260,25 @@ root element on the page.</p>
 <dd><p>Wait for a page class (container) to be present.
 This will cause that the page&#8217;s <em>is_current_page</em> method to be called until it returns true or a timeout
 is reached.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>page</strong> (<a class="reference internal" href="#slickwd.Container" title="slickwd.Container"><tt class="xref py py-class docutils literal"><span class="pre">Container</span></tt></a>) &#8211; The page class (container) to wait for it&#8217;s is_current_page to return True</li>
+<li><strong>timeout</strong> (<em>int or float (use float for sub-second precision)</em>) &#8211; the max time (in seconds) to wait before giving up on the page existing</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Should the activities of this method be logged, default is True</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">this instance for chaining of methods</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -342,11 +370,11 @@ the list of finders, and the first one that returns an element wins.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>finder</strong> (<em>Find</em>) &#8211; Another finder to consider when looking for the element.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>finder</strong> (<a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a>) &#8211; Another finder to consider when looking for the element.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">This same instance of Find with the other finder included.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -364,7 +392,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses it&#8217;s css classes as the way to find the element.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -382,7 +410,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses a css selector to find the element</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -400,7 +428,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses the id as the way to find the element.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -418,7 +446,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses the link&#8217;s text as the way to find the element.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -436,7 +464,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses the name attribute as the way to find the element.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -454,7 +482,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses part of the link&#8217;s text as the way to find the element.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -472,7 +500,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that looks for all elements on a page with a particular tag name</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -490,7 +518,7 @@ the list of finders, and the first one that returns an element wins.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an instance of Find that uses an xpath expression to find the element</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Find</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">Find</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -515,12 +543,42 @@ nice logging, and a finder field (should be of type <a class="reference internal
 <dt id="slickwd.WebElementLocator.describe">
 <tt class="descname">describe</tt><big>(</big><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.describe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Describe the current locator in plain english.  Used for logging.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">description of element locator including name and how it is looking for it</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="slickwd.WebElementLocator.find_all_elements_matching">
-<tt class="descname">find_all_elements_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_all_elements_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_all_elements_matching" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find any web elements matching any one of the finders.  This method returns a list.</p>
+<tt class="descname">find_all_elements_matching</tt><big>(</big><em>wd_browser</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_all_elements_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_all_elements_matching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a list of elements that match a finder.  This method can be useful if you are
+<a class="reference internal" href="raw-webdriver.html"><em>Using the Webdriver APIs</em></a> and need to select from and inspect a list of elements.</p>
+<p>There is no timeout because it will return an empty list if no matching elements are found.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wd_browser</strong> &#8211; The raw selenium webdriver driver instance.</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of matching elements</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of web element</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

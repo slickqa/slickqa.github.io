@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started Tutorial &mdash; slick-webdriver 1.0 documentation</title>
+  <title>Getting Started &mdash; slick-webdriver 1.0 documentation</title>
   
 
   
@@ -58,10 +58,9 @@
         
         
             <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started Tutorial</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#web-testing-overview">Web Testing Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-page-classes">Creating Page Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-tests">Writing Tests</a></li>
 </ul>
 </li>
@@ -111,7 +110,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Getting Started Tutorial</li>
+    <li>Getting Started</li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="sources/getting-started.txt" rel="nofollow"> View page source</a>
@@ -122,8 +121,8 @@
 </div>
           <div role="main">
             
-  <div class="section" id="getting-started-tutorial">
-<h1>Getting Started Tutorial<a class="headerlink" href="#getting-started-tutorial" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
@@ -134,23 +133,62 @@
 <a class="reference external" href="http://seleniumhq.org">Selenium</a> on which this project is based).  Because it is so simple, it is
 also real easy to get yourself into a maintenance nightmare.  This document will hopefully help you
 to get started in a way that will make things easy to grow and maintain.</p>
+<p>To do web testing using this library you are going to want:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>A Browser, <a class="reference external" href="http://getfirefox.com">Firefox</a> is one of the easiest to get started with selenium.</li>
+<li>Python (I assume you have this or why else are you looking at this?)</li>
+<li>This library installed into python (use pip to install it)</li>
+<li><a class="reference external" href="http://nose.readthedocs.org">Nose</a> though technically you can test with the builtin unittest module, nose makes
+running the tests easier.</li>
+</ol>
+</div></blockquote>
 </div>
 <div class="section" id="best-practices">
 <h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h2>
 <p>There are several things you will want to do to help you scale your testing from a couple of tests here and there to
-hundreds, possibly even thousands of tests.</p>
-</div>
-<div class="section" id="creating-page-classes">
-<h2>Creating Page Classes<a class="headerlink" href="#creating-page-classes" title="Permalink to this headline">¶</a></h2>
-<p>You will want to create page classes to organize your web testing.  This allows for code
-re-use between tests.  It also unclutters your tests, removing possibly repeated hard coded
-locators for web elements you are going to use in your testing.</p>
+hundreds, possibly even thousands of tests.  Below are suggestions, the framework does not restrict you to following
+them, but they will help.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Put your page classes in a separate place from your tests.  Make sure they are usable from multiple sets
+of tests, even if you don&#8217;t have multiple sets of tests yet. See <a class="reference internal" href="page-classes.html"><em>Page Classes</em></a>.</li>
+<li>Don&#8217;t put assertions in your page classes / framework code.  Assertions belong in tests, not framework.</li>
+<li>Don&#8217;t try to model everything your product does, model what you need for your test.  Spend time working on tests,
+the <em>framework</em> is just part of the test that has to be written for efficiency reasons (sharing code).</li>
+<li>Group your tests, and keep track of meta-data (however your framework chooses to do so).  It&#8217;ll come in handy when
+you need it later.</li>
+<li>Make your locators and page classes as simple as possible, this simpler it is, the easier it is to maintain.</li>
+<li>Don&#8217;t use record / playback tools, they create horrific unmaintainable code!</li>
+<li>Browser dev tools are great for helping you to inspect elements to automate.</li>
+<li>Make sure your tests read well, your test should look like a list of actions and assertions.  If you have a lot
+of boilerplate code, consider refactoring.</li>
+</ol>
+</div></blockquote>
 </div>
 <div class="section" id="writing-tests">
 <h2>Writing Tests<a class="headerlink" href="#writing-tests" title="Permalink to this headline">¶</a></h2>
-<p>When writing your tests, if you&#8217;ve already created the page classes, this part should be easy.
-Tests should be readable and easy to understand.  If you notice you are repeating yourself
-a lot, or your tests are confusing, stop and refactor!</p>
+<p>The process for writing tests involves working with 2 different types of code: page classes and <em>framework</em>, and test
+code.  You can easily write both at the same time.  Here is the typical workflow I do for writing a test:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Write the code (or reuse the code) to launch the browser, and manually open the browser.</li>
+<li>Go to the URL in the browser, and once again, write the code to go to the correct url.</li>
+<li>Go through any other setup procedure manually, and make sure you have code to match.  This is an excellent place
+for framework code, reusable setup code (like logging in).</li>
+<li>Look for the first web action to do, inspect the element.  Your looking for something that uniquely identifies the
+element.  An <strong>id</strong> is the easiest, but they are not always there, especially on repeated elements.  For forms,
+names can usually identify the elements.  As soon as you find what identifies it, create or add it to a page class.
+See <a class="reference internal" href="page-classes.html"><em>Page Classes</em></a> and <a class="reference internal" href="locators.html"><em>Locators</em></a> for more details.</li>
+<li>Keep adding code to exercise the web site, but look for places where you need to assert that things are progressing.
+Don&#8217;t be afraid to add assertions in the middle, make sure every step works properly.</li>
+</ol>
+</div></blockquote>
+<p>I think that writing the automation, while manually executing the test is the easiest way to create a good test.
+However, with this method you need to watch out for where it would break, or show errors when it&#8217;s not working.  You
+might need to look for elements that are there to display errors and assert that they are empty.</p>
+<p>Tests should be readable and easy to understand.  If you notice you are repeating yourself a lot, or your tests
+are confusing, stop and fix it!</p>
 </div>
 </div>
 

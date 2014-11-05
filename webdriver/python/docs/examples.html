@@ -183,7 +183,108 @@ Let&#8217;s start with the page classes and explain what they are here.</p>
 </div>
 <div class="section" id="nested-page-class-example">
 <h2>Nested Page Class Example<a class="headerlink" href="#nested-page-class-example" title="Permalink to this headline">¶</a></h2>
-<p>There are multiple files to analyze here so we will go through them one by one.  First our test, it&#8217;s fairly simple.</p>
+<p>Nested page classes can be nice for code completion (if you are using an editor or IDE with python code completion like
+<a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm</a>), and it can improve your log output.  Below you&#8217;ll see an example that
+is very much like the above example (it does the same test), but with nested page classes stored in another python
+file.  First the page classes (<a class="reference external" href="https://github.com/slickqa/slick-webdriver-python/blob/master/examples/nested-page-classes/pages.py">pages.py</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">slickwd</span> <span class="kn">import</span> <span class="n">Container</span><span class="p">,</span> <span class="n">WebElementLocator</span><span class="p">,</span> <span class="n">Find</span>
+
+<span class="k">class</span> <span class="nc">GoogleRootContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Root google page.  An instance is supposed to be created called Google.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">container_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Home</span> <span class="o">=</span> <span class="n">GoogleHomePage</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SearchResults</span> <span class="o">=</span> <span class="n">GoogleSearchResultsPage</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">GoogleHomePage</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Google &quot;Home&quot; page, or www.google.com.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Box&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;q&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Search_Button</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Button&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;btnG&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">browser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">GoogleSearchResultsPage</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A page with google search results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Results_Div</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Results Div&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="s">&quot;ires&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">browser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Results_Div</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+
+<span class="n">Google</span> <span class="o">=</span> <span class="n">GoogleRootContainer</span><span class="p">(</span><span class="s">&quot;Google&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the tests (<a class="reference external" href="https://github.com/slickqa/slick-webdriver-python/blob/master/examples/nested-page-classes/searchtests.py">searchtests.py</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">slickwd</span> <span class="kn">import</span> <span class="n">BrowserType</span><span class="p">,</span> <span class="n">Browser</span>
+<span class="kn">from</span> <span class="nn">pages</span> <span class="kn">import</span> <span class="n">Google</span>
+<span class="kn">from</span> <span class="nn">nose</span> <span class="kn">import</span> <span class="n">with_setup</span>
+<span class="kn">from</span> <span class="nn">nose.tools</span> <span class="kn">import</span> <span class="n">assert_regexp_matches</span>
+
+
+<span class="n">browser</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+<span class="k">def</span> <span class="nf">s</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">Browser</span><span class="p">(</span><span class="n">BrowserType</span><span class="o">.</span><span class="n">PHANTOMJS</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+<span class="nd">@with_setup</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cleanup</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_google_search</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">go_to</span><span class="p">(</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">wait_for_page</span><span class="p">(</span><span class="n">Google</span><span class="o">.</span><span class="n">Home</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">click_and_type</span><span class="p">(</span><span class="n">Google</span><span class="o">.</span><span class="n">Home</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span><span class="p">,</span> <span class="s">&quot;Slick Test Manager&quot;</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Google</span><span class="o">.</span><span class="n">Home</span><span class="o">.</span><span class="n">Search_Button</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">wait_for_page</span><span class="p">(</span><span class="n">Google</span><span class="o">.</span><span class="n">SearchResults</span><span class="p">)</span>
+    <span class="n">assert_regexp_matches</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">get_page_text</span><span class="p">(),</span> <span class="s">&#39;.*SlickQA:.*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As mentioned above there are 2 primary advantages for the nested page classes: first code completion in a python IDE,
+and second in the logs.  The logs are improved because every time you do an action such as clicking on an element, you
+can see the hierarchy of page classes and what element a page is on.  This doesn&#8217;t happen with the static layout.</p>
+<p>Here is an example of the output you would get from the logs:</p>
+<div class="highlight-python"><div class="highlight"><pre>slickwd.Browser: DEBUG: New browser instance requested with browser_type=&#39;PHANTOMJS&#39; and remote_url=None
+slickwd.Browser: INFO: Creating a new browser (locally connected) of type phantomjs
+slickwd.Browser: DEBUG: Navigating to url &#39;http://www.google.com&#39;.
+slickwd.Browser: DEBUG: Waiting for up to 30.00 seconds for page Google.Home to be the current page.
+slickwd.Browser: DEBUG: Found page Google.Home after 0.01 seconds.
+slickwd.WebElementLocator: DEBUG: Waiting for up to 30.00 seconds for element Search Box on page Google.Home found by name &quot;q&quot; to be available.
+slickwd.WebElementLocator: INFO: Found element Search Box using locator property name &quot;q&quot; after 0.01 seconds.
+slickwd.Browser: DEBUG: Clicking on element Search Box on page Google.Home found by name &quot;q&quot;
+slickwd.Browser: DEBUG: Typing &quot;Slick Test Manager&quot; into element Search Box on page Google.Home found by name &quot;q&quot;
+slickwd.WebElementLocator: DEBUG: Waiting for up to 30.00 seconds for element Search Button on page Google.Home found by name &quot;btnG&quot; to be available.
+slickwd.WebElementLocator: INFO: Found element Search Button using locator property name &quot;btnG&quot; after 0.01 seconds.
+slickwd.Browser: DEBUG: Clicking on element Search Button on page Google.Home found by name &quot;btnG&quot;
+slickwd.Browser: DEBUG: Waiting for up to 30.00 seconds for page Google.SearchResults to be the current page.
+slickwd.Browser: DEBUG: Found page Google.SearchResults after 0.01 seconds.
+slickwd.Browser: INFO: Calling quit on browser instance.
+</pre></div>
+</div>
+<p>Notice each element knows what page it is on in the code, and each page knows it&#8217;s <em>parent</em> in the hierarchy.  This
+can help greatly when comparing code and logs, as well as navigating code.</p>
 </div>
 </div>
 

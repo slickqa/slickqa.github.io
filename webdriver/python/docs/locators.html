@@ -72,7 +72,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Locators</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-locators">What are Locators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#common-strategies">Common Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-one-step-by-step">Creating One Step by Step</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#more-complex-strategies">More Complex Strategies</a></li>
 </ul>
 </li>
@@ -132,23 +132,71 @@
 <p>Locators are the most basic element in Slick Webdriver.  The idea is that a locator defines how to find an element
 that you want to take action on.  How you define your locators can help make the difference between easy and
 very difficult maintenance levels for your tests.  The good news is that it&#8217;s easy to make your maintenance easy.</p>
-<p>Locators are instances of the <a class="reference internal" href="slickwd.html#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.WebElementLocator</span></tt></a>, but are most often created by using methods
-on the <a class="reference internal" href="slickwd.html#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.Find</span></tt></a> class.</p>
+<p>Locators are instances of the <a class="reference internal" href="slickwd.html#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.WebElementLocator</span></tt></a>.  The most critical parameter to it&#8217;s constructor is
+often created by using methods on the <a class="reference internal" href="slickwd.html#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.Find</span></tt></a> class.  For an example see <a class="reference internal" href="examples.html"><em>Examples</em></a> .</p>
+<p>If you can keep your locators defined simply, they are less likely to break when something else in the website you are
+testing changes.  It can be frustrating to have your tests break because an unrelated area of the product was changed.
+To avoid this you want to define your locators using information that doesn&#8217;t depend on other areas of the web page.</p>
 </div>
-<div class="section" id="common-strategies">
-<h2>Common Strategies<a class="headerlink" href="#common-strategies" title="Permalink to this headline">¶</a></h2>
-<p>If you can keep your locators defined simply, they are less likely to break when something else in the product
-changes.  It can be frustrating to have your tests break because an unrelated area of the product was changed.  To
-avoid this you want to define your locators using information that doesn&#8217;t depend on other areas of the web page.</p>
+<div class="section" id="creating-one-step-by-step">
+<h2>Creating One Step by Step<a class="headerlink" href="#creating-one-step-by-step" title="Permalink to this headline">¶</a></h2>
 <p>In the end, your are looking for something unique about the element you are trying to locate.  Most often web
 developers need to identify the element uniquely for styling or attaching javascript event listeners, so you
 shouldn&#8217;t have too much trouble.</p>
+<div class="section" id="step-1-navigate-to-the-page-in-a-browser">
+<h3>Step 1: Navigate to the page in a browser<a class="headerlink" href="#step-1-navigate-to-the-page-in-a-browser" title="Permalink to this headline">¶</a></h3>
+<p>Open a web browser and go to the page you are automating.  Which web browser you choose should be based on which one
+you are most comfortable working with (as long as it is one you are testing on as well).  Most browsers have good
+dev tools to help you.  Make sure you turn them on so they are available.  For this example I&#8217;ll be showing Chrome&#8217;s
+dev tools.</p>
+<p>The locator we are going to create in this example will be the google search page&#8217;s search box.  So in this example
+I navigate to <a class="reference external" href="https://www.google.com">www.google.com</a>.</p>
+</div>
+<div class="section" id="step-2-inspect-the-element-using-dev-tools">
+<h3>Step 2: Inspect the element using dev tools<a class="headerlink" href="#step-2-inspect-the-element-using-dev-tools" title="Permalink to this headline">¶</a></h3>
+<p>Right click on the element to and select <em>Inspect Element</em> (the name may be different if you are using a different
+browser).</p>
+<p><img alt="inspect-element-1" src="images/inspect-element-1.png" /></p>
+<p>You should see a line in your inspector highlighted like this:</p>
+<p><img alt="inspect-element-2" src="images/inspect-element-2.png" /></p>
+</div>
+<div class="section" id="step-3-select-an-attribute">
+<h3>Step 3: Select an attribute<a class="headerlink" href="#step-3-select-an-attribute" title="Permalink to this headline">¶</a></h3>
+<p>Which attribute to choose???  Normally if there is an id available I would say use that.  But with forms I like
+choosing the name.  This is because I believe that developers are lazy and if an id changes they only have to change
+css or javascript.  If a name changes, they usually have to change the backend, and it might possibly break any links
+they have.  I find the <em>name</em> attribute on forms to be more stable, especially on a search like this.</p>
+</div>
+<div class="section" id="step-4-add-it-to-a-page-class">
+<h3>Step 4: Add it to a page class<a class="headerlink" href="#step-4-add-it-to-a-page-class" title="Permalink to this headline">¶</a></h3>
+<p>Depending on which type of page class pattern you have selected (see <a class="reference internal" href="page-classes.html"><em>Page Classes</em></a> for more detail), where you
+put the following line will change, as well as the assignment.  I&#8217;ll show the nested page class syntax here because it&#8217;s
+my personal preference:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">GoogleHomePage</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Google &quot;Home&quot; page, or www.google.com.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Box&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;q&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In this example I&#8217;ve added the <a class="reference internal" href="slickwd.html#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.WebElementLocator</span></tt></a> to a page class called <em>GoogleHomePage</em>.  The first
+parameter to the <a class="reference internal" href="slickwd.html#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.WebElementLocator</span></tt></a> initializer is a string which is the name of the element.  This is
+a plain english name explaining the purpose of the element so it&#8217;s easier to read and understand in the logs.</p>
+<p>The second parameter is a find expression using the <a class="reference internal" href="slickwd.html#slickwd.Find" title="slickwd.Find"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.Find</span></tt></a> class.  In this case I used the name property
+to find the element.  It&#8217;s important to note that finders work best when they uniquely identify the element.  With id or
+name properties that&#8217;s easy, with css class names, sometimes it&#8217;s hard.</p>
+</div>
 </div>
 <div class="section" id="more-complex-strategies">
 <h2>More Complex Strategies<a class="headerlink" href="#more-complex-strategies" title="Permalink to this headline">¶</a></h2>
 <p>If the element your trying to uniuqely identify on the page has nothing unique, you may have to rely on other
 elements in the hierarchy to uniquely identify it.  This could be a pattern of how the element is laid out,
-an ancestor that is uniquely identifiable, etc.</p>
+an ancestor that is uniquely identifiable, etc.  <a class="reference external" href="http://www.w3schools.com/xpath">XPath</a> is an immensely powerful
+language for finding elements, and webdriver supports using it to find elements.  However, it can make code harder
+to read an understand by a novice.  Also complex XPath expressions will likely make your tests more fragile.  Use
+with caution.  Sometimes you have no choice.</p>
 </div>
 </div>
 

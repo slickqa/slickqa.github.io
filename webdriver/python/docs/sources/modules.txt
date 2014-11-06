@@ -1,7 +1,0 @@
-slickwd
-=======
-
-.. toctree::
-   :maxdepth: 4
-
-   slickwd

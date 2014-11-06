@@ -58,10 +58,10 @@
         
         
             <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#web-testing-overview">Web Testing Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#writing-tests">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#web-testing-in-general">Web Testing in General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#writing-tests">Writing Tests</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="page-classes.html">Page Classes</a><ul>
@@ -166,6 +166,7 @@ and searches for <em>Slick Test Manager</em> and ensures a particular page is in
     <span class="k">global</span> <span class="n">browser</span>
     <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="n">browser</span> <span class="o">=</span> <span class="bp">None</span>
 
 <span class="nd">@with_setup</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cleanup</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_google_search</span><span class="p">():</span>
@@ -179,7 +180,95 @@ and searches for <em>Slick Test Manager</em> and ensures a particular page is in
 </pre></div>
 </div>
 <p>This may seem like a lot, but normally the <a class="reference internal" href="page-classes.html"><em>Page Classes</em></a> would be in a different module that you would import.
-Let&#8217;s start with the page classes and explain what they are here.</p>
+Let&#8217;s start with the page classes and explain what they are here:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">GoogleSearchPage</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="n">Search_Query_Text_Field</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Box&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;q&quot;</span><span class="p">))</span>
+    <span class="n">Search_Button</span> <span class="o">=</span> <span class="n">WebElementLocator</span><span class="p">(</span><span class="s">&quot;Search Button&quot;</span><span class="p">,</span> <span class="n">Find</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s">&quot;btnG&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">is_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">browser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this page class, there are 2 <em>locators</em>.  The locators are the elements that are used in tests.  Page classes
+mostly serve as a grouping of WebElementLocators.  The first locator is named <em>Search Box</em> and it looks for an element
+anywhere on the page with the <em>name=&#8221;q&#8221;</em> attribute on it.  In this case it&#8217;s an input box of type text.  Notice I didn&#8217;t
+have to supply all that info, just the part that uniquely identifies the element so that webdriver can get a hold of it.</p>
+<p>The second element is very similar, it&#8217;s called &#8220;Search Button&#8221; and it is identified by it&#8217;s name attribute as well.</p>
+<p>The page class is a sub class of <a class="reference internal" href="slickwd.html#slickwd.Container" title="slickwd.Container"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.Container</span></tt></a>.  In terms of this framework that is special because it
+allows the page to include a method to <em>detect</em> itself.  The <em>is_current_page</em> method needs to return a boolean (true
+or false) and should execute very quickly.  This method is what allows for the test to call <em>wait_for_page</em> on this
+page.  We will see that later on in the test.  The only things that may look out of place on the <em>is_current_page</em>
+method is the last 2 parameters that you don&#8217;t normally pass in.  These tell the framework to only check for the
+element 1 time (<em>timeout=0</em> parameter), and not to log it (<em>log=False</em> parameter).  The logging is there because
+logging each call to is_current_page in this context could be redundant noise in the logs.  By setting <em>log=False</em> in
+the page class&#8217;s call to <em>browser.exists(...)</em> we make sure that only the tests explicit calls to browser actions
+are logged.</p>
+<p>I won&#8217;t cover line by line the second page class as it is almost the same as the first.</p>
+<p>The setup and cleanup methods are worth making a few notes about:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">browser</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+<span class="k">def</span> <span class="nf">s</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">Browser</span><span class="p">(</span><span class="n">BrowserType</span><span class="o">.</span><span class="n">FIREFOX</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="k">if</span> <span class="n">browser</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="n">browser</span> <span class="o">=</span> <span class="bp">None</span>
+</pre></div>
+</div>
+<p>In this part of the example we have first a global variable (or at least module level variable).  This allows us
+to use this variable in all the test functions.  I could have used a class instead and made this an instance variable
+but I used module level variables (with functions) instead.</p>
+<p>Notice how the setup method is named <em>s()</em>.  This is because if I had named it setup, nose would have treated it as a
+module level setup function, and it would have been called twice on the first test.</p>
+<p>Notice how the setup quits the browser if it&#8217;s running.  To make tests more robust they should be able to handle any
+scenario of bad or unworking cleanup.  I should have also put the quit in a try block, but I&#8217;ll leave that as an
+exercise of the reader.</p>
+<p>Using a setup and cleanup to start and stop the browser is a good idea mostly because it centralizes the logic of
+launching the browser.  In this case the browser is hard coded, but it&#8217;s actually recommended to make that a
+configuration parameter.  You can do that using environment variables or a configuration file.  Once again that is
+left to the reader to implement.</p>
+<p>Finally the test:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@with_setup</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cleanup</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_google_search</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">browser</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">go_to</span><span class="p">(</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">wait_for_page</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">click_and_type</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="o">.</span><span class="n">Search_Query_Text_Field</span><span class="p">,</span> <span class="s">&quot;Slick Test Manager&quot;</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">GoogleSearchPage</span><span class="o">.</span><span class="n">Search_Button</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">wait_for_page</span><span class="p">(</span><span class="n">SearchResultsPage</span><span class="p">)</span>
+    <span class="n">assert_regexp_matches</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">get_page_text</span><span class="p">(),</span> <span class="s">&#39;.*SlickQA:.*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The test is marked with the setup and cleanup functions.  Then notice how there is very little busy work for the test.
+This test should be clear.  The only real thing to note is the final line that does the assertion.  A better way would
+have been to look at a specific link text, but that would have been more work without a major benefit, and it may have
+made the test more fragile.</p>
+<p>Finally let&#8217;s look at the logging output of this test, as that is a feature of the framework:</p>
+<div class="highlight-python"><div class="highlight"><pre>slickwd.Browser: DEBUG: New browser instance requested with browser_type=&#39;FIREFOX&#39; and remote_url=None
+slickwd.Browser: INFO: Creating a new browser (locally connected) of type firefox
+slickwd.Browser: DEBUG: Navigating to url &#39;http://www.google.com&#39;.
+slickwd.Browser: DEBUG: Waiting for up to 30.00 seconds for page GoogleSearch to be the current page.
+slickwd.Browser: DEBUG: Found page GoogleSearch after 0.24 seconds.
+slickwd.WebElementLocator: DEBUG: Waiting for up to 30.00 seconds for element Search Box found by name &quot;q&quot; to be available.
+slickwd.WebElementLocator: INFO: Found element Search Box using locator property name &quot;q&quot; after 0.00 seconds.
+slickwd.Browser: DEBUG: Clicking on element Search Box found by name &quot;q&quot;
+slickwd.Browser: DEBUG: Typing &quot;Slick Test Manager&quot; into element Search Box found by name &quot;q&quot;
+slickwd.WebElementLocator: DEBUG: Waiting for up to 30.00 seconds for element Search Button found by name &quot;btnG&quot; to be available.
+slickwd.WebElementLocator: INFO: Found element Search Button using locator property name &quot;btnG&quot; after 0.01 seconds.
+slickwd.Browser: DEBUG: Clicking on element Search Button found by name &quot;btnG&quot;
+slickwd.Browser: DEBUG: Waiting for up to 30.00 seconds for page SearchResults to be the current page.
+slickwd.Browser: DEBUG: Found page SearchResults after 3.60 seconds.
+slickwd.Browser: INFO: Calling quit on browser instance.
+</pre></div>
+</div>
+<p>Notice how even thought the test doesn&#8217;t explicitly make any logging requests, we can see what the test did, how it
+did it, and how long it took to do it.</p>
 </div>
 <div class="section" id="nested-page-class-example">
 <h2>Nested Page Class Example<a class="headerlink" href="#nested-page-class-example" title="Permalink to this headline">¶</a></h2>

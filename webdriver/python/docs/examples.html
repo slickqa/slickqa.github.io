@@ -374,6 +374,46 @@ slickwd.Browser: INFO: Calling quit on browser instance.
 </div>
 <p>Notice each element knows what page it is on in the code, and each page knows it&#8217;s <em>parent</em> in the hierarchy.  This
 can help greatly when comparing code and logs, as well as navigating code.</p>
+<p>I&#8217;m going to go backwards through the code.  First let&#8217;s look at the test.  The test is almost the same as in the
+single page example.  The difference comes in the page and elements.  Notice how each of the page classes starts with
+<em>Google.</em>.  This is the root page in the page class hierarchy.  The advantage (as was said above) comes when using an
+IDE.  Take a look at the following screenshot taken while writing the test:</p>
+<p><img alt="code-completion" src="images/code-completion.png" /></p>
+<p>This allows the people writing the tests to effectively browse through the hierarchy of available elements, reducing
+the possibility of duplication of definitions.</p>
+<p>The page classes are a little bit different than explained in the simple example.  Let&#8217;s go through the differences:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">GoogleRootContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Root google page.  An instance is supposed to be created called Google.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">container_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Home</span> <span class="o">=</span> <span class="n">GoogleHomePage</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SearchResults</span> <span class="o">=</span> <span class="n">GoogleSearchResultsPage</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This page class is entirely new.  In our page class hierarchy this is the root.  It is responsible for creating
+instances of all the other nested page classes.  Notice that they are created in the <em>__init__</em> instead of statically
+on the page.  There is one other thing different about this page class.  It accepts a name parameter.  One of the
+advantages of page classes is that each element and page knows it&#8217;s name as far as the hierarchy is concerned.  But
+in order for that to work you have to name the root node.</p>
+<p>Something you don&#8217;t even realize that is happening here is that when the constructor to <em>GoogleHomePage</em> is called and
+assigned to the <em>Home</em> attribute name on the current instance, underneath the <em>Container</em> class sets up the parent-child
+relationship and sets the known name for the <em>GoogleHomePage</em> instance to <em>Home</em>.  This is why you only have to set the
+name of the root node of your hierarchy.</p>
+<p>The other page classes look similar, except the <a class="reference internal" href="slickwd.html#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">slickwd.WebElementLocator</span></tt></a> instances are now instantiated
+inside the page class&#8217;s <em>__init__</em>.</p>
+<p>I only show 2 levels of page class here, but you can nest them as deep as you want (mostly).  Recursion is used for
+getting the names of pages, but if you hit that limit you will have an extremely deep hierarchy.</p>
+<p>The only other line that might look different is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Google</span> <span class="o">=</span> <span class="n">GoogleRootContainer</span><span class="p">(</span><span class="s">&quot;Google&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This line allows for an importable name called Google that is a singleton instance of the class GoogleRootContainer.
+This could have been instantiated in a setup, if for instance you needed to pass configuration data to the page class
+hierarchy.  One example of needing to do this is if you had different locators for different versions of a product.
+You could store that version in the page class hierarchy in order to decide which locator to add to the page class.</p>
 </div>
 </div>
 

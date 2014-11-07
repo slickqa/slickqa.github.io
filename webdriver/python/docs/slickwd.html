@@ -216,6 +216,32 @@ any logging.  If you specify 0 for the timeout, the framework will only look for
 </dd></dl>
 
 <dl class="method">
+<dt id="slickwd.Browser.get_attribute_value">
+<tt class="descname">get_attribute_value</tt><big>(</big><em>locator</em>, <em>attribute_name</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.get_attribute_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.get_attribute_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of an html element&#8217;s attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator that specifies which element to get the attribute value of</li>
+<li><strong>attribute_name</strong> (<em>str</em>) &#8211; the name of the attribute to get</li>
+<li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the text of the element on success, exception raised on inability to find the element</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="slickwd.Browser.get_page_text">
 <tt class="descname">get_page_text</tt><big>(</big><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.get_page_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.get_page_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the text from the current web page.  This tries to get the value of the &#8220;text&#8221; attribute of the html
@@ -227,6 +253,31 @@ root element on the page.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the text of the current page</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Browser.get_text">
+<tt class="descname">get_text</tt><big>(</big><em>locator</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.get_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.get_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the text of an element on the page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator that specifies which element to get the text of</li>
+<li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the text of the element on success, exception raised on inability to find the element</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
 </tr>
 </tbody>
 </table>

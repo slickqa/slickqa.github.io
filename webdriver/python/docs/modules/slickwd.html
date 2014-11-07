@@ -658,6 +658,54 @@
         <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s">&quot;html&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span>
+</div>
+<div class="viewcode-block" id="Browser.get_text"><a class="viewcode-back" href="../slickwd.html#slickwd.Browser.get_text">[docs]</a>    <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the text of an element on the page.</span>
+
+<span class="sd">        :param locator: the locator that specifies which element to get the text of</span>
+<span class="sd">        :type locator: :class:`.WebElementLocator`</span>
+<span class="sd">        :param timeout: The amount of time (in seconds) to look before throwing a not found exception</span>
+<span class="sd">        :type timeout: int or float (float for sub-second precision)</span>
+<span class="sd">        :param log: Whether or not to log details of the look for the element (default is True)</span>
+<span class="sd">        :type log: bool</span>
+<span class="sd">        :return: the text of the element on success, exception raised on inability to find the element</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">locator</span><span class="o">.</span><span class="n">find_element_matching</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Unable to find element {} after waiting for {:.2f} seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Found element {}, returning text: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="n">text</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">text</span>
+</div>
+<div class="viewcode-block" id="Browser.get_attribute_value"><a class="viewcode-back" href="../slickwd.html#slickwd.Browser.get_attribute_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the value of an html element&#39;s attribute.</span>
+
+<span class="sd">        :param locator: the locator that specifies which element to get the attribute value of</span>
+<span class="sd">        :type locator: :class:`.WebElementLocator`</span>
+<span class="sd">        :param attribute_name: the name of the attribute to get</span>
+<span class="sd">        :type attribute_name: str</span>
+<span class="sd">        :param timeout: The amount of time (in seconds) to look before throwing a not found exception</span>
+<span class="sd">        :type timeout: int or float (float for sub-second precision)</span>
+<span class="sd">        :param log: Whether or not to log details of the look for the element (default is True)</span>
+<span class="sd">        :type log: bool</span>
+<span class="sd">        :return: the text of the element on success, exception raised on inability to find the element</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timeout</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">locator</span><span class="o">.</span><span class="n">find_element_matching</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd_instance</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">WebDriverException</span><span class="p">(</span><span class="s">&quot;Unable to find element {} after waiting for {:.2f} seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="nb">float</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Found element {}, attribute {} has value: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">locator</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">value</span>
 
 </div></div>
 <div class="viewcode-block" id="Container"><a class="viewcode-back" href="../slickwd.html#slickwd.Container">[docs]</a><span class="k">class</span> <span class="nc">Container</span><span class="p">:</span>

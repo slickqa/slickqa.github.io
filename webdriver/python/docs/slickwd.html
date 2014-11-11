@@ -216,6 +216,31 @@ any logging.  If you specify 0 for the timeout, the framework will only look for
 </dd></dl>
 
 <dl class="method">
+<dt id="slickwd.Browser.first_page_found">
+<tt class="descname">first_page_found</tt><big>(</big><em>page_classes</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.first_page_found"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.first_page_found" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for the first page class that returns true, and return it.  This is useful when you are trying to detect
+if a particular flow is happening.  Rather than waiting for one page class, this goes through a list each time
+and as soon as one returns true, it returns that element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>page_classes</strong> &#8211; The list of page classes or page class instances.  Whatever you pass in here is what will
+be returned if found.</li>
+<li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A page class from the list passed in (if found), None otherwise</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="slickwd.Browser.get_attribute_value">
 <tt class="descname">get_attribute_value</tt><big>(</big><em>locator</em>, <em>attribute_name</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.get_attribute_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.get_attribute_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the value of an html element&#8217;s attribute.</p>
@@ -395,6 +420,40 @@ values are static properties on the BrowserType class.</p>
 <em class="property">class </em><tt class="descclassname">slickwd.</tt><tt class="descname">Container</tt><a class="reference internal" href="modules/slickwd.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Container" title="Permalink to this definition">¶</a></dt>
 <dd><p>A generic container for structuring multiple <em>WebElementLocator</em> into groupings that help programmers find the right
 shared definition.</p>
+<dl class="method">
+<dt id="slickwd.Container.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="reference internal" href="modules/slickwd.html#Container.get_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Container.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the full name of this page.  If using nested <a class="reference internal" href="page-classes.html"><em>Page Classes</em></a> this will get the full <em>dotted</em> name
+of the page class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A string containing the best guess at the page class name.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Container.is_current_page">
+<tt class="descname">is_current_page</tt><big>(</big><em>browser</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Container.is_current_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Container.is_current_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>You should override this method in a subclass of Container.  This method is used to see if what is in the
+browser currently matches one or more elements of this class.  This method should be quick (timeout 0 for all
+your calls).  It may get called a lot, so you may want to turn off logging for any browser methods called
+(log=False parameter).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>browser</strong> &#8211; A <a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a> instance to use in detecting if this is the current page.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the current page matches what is in the browser, False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">

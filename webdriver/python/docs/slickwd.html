@@ -309,6 +309,42 @@ root element on the page.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="slickwd.Browser.get_title">
+<tt class="descname">get_title</tt><big>(</big><em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.get_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.get_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current title of the page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the title of the page</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Browser.get_url">
+<tt class="descname">get_url</tt><big>(</big><em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.get_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current url of the web page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The URL as a string (how else would you represent it?)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="slickwd.Browser.go_to">
 <tt class="descname">go_to</tt><big>(</big><em>url</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.go_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.go_to" title="Permalink to this definition">¶</a></dt>
 <dd><p>Navigate the browser to the url provided</p>
@@ -325,6 +361,72 @@ root element on the page.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">this instance for chaining of methods</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Browser.refresh">
+<tt class="descname">refresh</tt><big>(</big><em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.refresh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refresh the page.
+:return: The reference to this Browser instance.
+:rtype: <a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Browser.screenshot_as_byte">
+<tt class="descname">screenshot_as_byte</tt><big>(</big><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.screenshot_as_byte"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.screenshot_as_byte" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a screenshot of the browser, and return it as a png byte array.
+:rtype: byte[]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Browser.select_option_by_text">
+<tt class="descname">select_option_by_text</tt><big>(</big><em>locator</em>, <em>option_text</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.select_option_by_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.select_option_by_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select an option of a select element by partial or complete text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator that specifies how to find the select element</li>
+<li><strong>option_text</strong> (<em>str</em>) &#8211; The text of the option to select</li>
+<li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The reference to this Browser instance.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="slickwd.Browser.type">
+<tt class="descname">type</tt><big>(</big><em>locator</em>, <em>keys</em>, <em>timeout=None</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#Browser.type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.Browser.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send key strokes to an element.  Mostly used for input elements of type text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>locator</strong> (<a class="reference internal" href="#slickwd.WebElementLocator" title="slickwd.WebElementLocator"><tt class="xref py py-class docutils literal"><span class="pre">WebElementLocator</span></tt></a>) &#8211; the locator that specifies which element to send keystrokes to (usually defined on a Page class)</li>
+<li><strong>timeout</strong> (<em>int or float (float for sub-second precision)</em>) &#8211; The amount of time (in seconds) to look before throwing a not found exception</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; Whether or not to log details of the look for the element (default is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The reference to this Browser instance.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#slickwd.Browser" title="slickwd.Browser"><tt class="xref py py-class docutils literal"><span class="pre">Browser</span></tt></a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -667,7 +769,7 @@ nice logging, and a finder field (should be of type <a class="reference internal
 
 <dl class="method">
 <dt id="slickwd.WebElementLocator.find_all_elements_matching">
-<tt class="descname">find_all_elements_matching</tt><big>(</big><em>wd_browser</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_all_elements_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_all_elements_matching" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">find_all_elements_matching</tt><big>(</big><em>wd_browser</em>, <em>log=True</em>, <em>angular=False</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_all_elements_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_all_elements_matching" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a list of elements that match a finder.  This method can be useful if you are
 <a class="reference internal" href="raw-webdriver.html"><em>Using the Webdriver APIs</em></a> and need to select from and inspect a list of elements.</p>
 <p>There is no timeout because it will return an empty list if no matching elements are found.</p>
@@ -693,7 +795,7 @@ nice logging, and a finder field (should be of type <a class="reference internal
 
 <dl class="method">
 <dt id="slickwd.WebElementLocator.find_element_matching">
-<tt class="descname">find_element_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_element_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_element_matching" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">find_element_matching</tt><big>(</big><em>wd_browser</em>, <em>timeout</em>, <em>log=True</em>, <em>angular=False</em><big>)</big><a class="reference internal" href="modules/slickwd.html#WebElementLocator.find_element_matching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#slickwd.WebElementLocator.find_element_matching" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a single element matching the finder(s) that make up this locator before a timeout is reached.
 This method is used internally by the framework when you call any action on a WebElementLocator, however
 like is mentioned in <a class="reference internal" href="raw-webdriver.html"><em>Using the Webdriver APIs</em></a> you can use this method to help you get the raw webelements from

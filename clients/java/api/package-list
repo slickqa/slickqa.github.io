@@ -1,0 +1,6 @@
+com.slickqa.client
+com.slickqa.client.apiparts
+com.slickqa.client.errors
+com.slickqa.client.impl
+com.slickqa.client.model
+com.slickqa.util
